@@ -1,0 +1,133 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>CollegiateRecruiting</title>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/png">
+    <meta content="width=device-width; initial-scale=1; maximum-scale=1; user-scalable=0;"
+        name="viewport">
+    <link href="../css/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div>
+        <div id="wraper">
+            <header>
+          <nav>
+              <ul class="clearfix">
+                  <li>
+                      <a href="#.html" title="home" target="#">Sports</a>
+                  </li>
+                  <li>
+                      <a href="#.html" title="mediakit" target="#">Articles</a>
+                  </li>
+                  <li>
+                      <a class="ui-link" href="#.html" title="faq" target="#">Teams</a>
+                  </li>
+                  <li>
+                      <a class="ui-link" href="#.html" title="feedback" target="#">Messages</a>
+                  </li>
+                  <li>
+                      <a class="ui-link" href="#.html" title="contactus" target="#">Fanclubs</a>
+                  </li>
+              </ul>
+          </nav>
+      </header>
+            <!-- header ends -->
+            <!-- container starts-->
+            <!-- inner menu starts-->
+            <div class="innermenu">
+                <ul class="clearfix">
+                    <li><a href="#.html" title="home" target="#">Home</a> </li>
+                    <li class="sep"></li>
+                    <li><a href="#.html" title="mediakit" target="#">Profile</a> </li>
+                    <li class="sep"></li>
+                    <li><a class="ui-link" href="#.html" title="faq" target="#">MessageBoard</a> </li>
+                    <li class="StaticMenu"><a href="#.html" title="home" target="#">Menu</a> </li>
+                </ul>
+            </div>
+            <!-- inner menu ends-->
+            <div class="contetns">
+                <div class="innerwrapper">
+                    <h4>
+                        Collegiate Recruiting</h4>
+                    <p>
+                        <strong>Kids2ProSports.com</strong>is proud to partner and be a member of the following
+                        Collegiate Sport Recruiting Organizations to assist our members in their quest for
+                        sport career advancement; introduction to coaches and administrators; scholarship
+                        opportunities and securing the best education available.</p>
+                    <p>
+                        You can utilize the information created in your profiles and related resources from
+                        our site to further enhance your presentations.</p>
+                    <p>
+                        Good Luck!</p>
+                    <p>
+                        <span class="ownLine">Alan Chokov</span><span class="ownLine">Founder/President</span></p>
+                    <p>
+                        <img src="Images/AffilateLogos/berecruitedLogo.png" alt="berecruited.com logo" /><a
+                            href="http://www.brecruited.com">beRecruited.com</a> is the nation's No. 1 online
+                        networking destination for high school student-athletes seeking recruitment from
+                        college coaches and universities. beRecruited provides a platform for student athletes
+                        to connect and interact with college coaches across the nation, giving students
+                        the tools to research and build profiles of verified athletic and academic information,
+                        as well as providing coaches with a vast, searchable database of potential recruits.
+                        To date, beRecruited has more than 800,000 registered student-athletes, 18,000 college
+                        coaches and 25,000 high school & club coaches, and 25,000 parents.</p>
+                    <p>
+                        <a href="http://www.CareerAthletics.com">
+                            <img src="Images/AffilateLogos/leageAthleticslogo.png" alt=" Athletics Logo" /></a>
+                        Career Athletes is the leading provider of a wide range of dedicated career development
+                        services and software within collegiate athletics. Since the inception of our roots
+                        back in 1998-to-date, athletes in every sport, from over 1,200 individual colleges
+                        and universities nationwide, have utilized Career Athletes as a valuable tool in
+                        their transition from athletics to the workplace.
+                    </p>
+                    <p>
+                        Career Athletes possesses the largest member based community of current/alumni student-athletes,
+                        representing a growing legion of athletes, athletic departments and hundreds of
+                        national, regional and local employers. Today, our on-campus training and development
+                        seminars to student-athletes are the most relied upon in the nation, with over 800
+                        seminars conducted and over 240,000 student-athletes educated on-campus within college
+                        athletic departments at the NCAA, NAIA and Junior Colleges level.
+                    </p>
+                </div>
+            </div>
+            <!-- container ends-->
+            <!-- footer starts -->
+            <div id="footerWrap">
+                <footer>
+              <a href="../userprofile.html" title="home" target="_self">Home</a>
+              <a href= "static/Affiliates.html" title="Affiliates" target="_self">Affiliates</a>
+              <a href="static/CollegiateRecruiting.html" title="Collegiate Recruiting" target="_self">Collegiate Recruiting</a>
+              <a href="#.html" title="Philanthropy" target="_self">Philanthropy</a>
+              <a href="#.html" title="Disability Sports" target="_self">Disability Sports</a>
+              <a href="static/Education.html" title="Education & Sports" target="_self">Education & Sports</a>
+              <a href="static/K2psZOO.html" title="K2psZOO" target="_self">K2psZOO</a>
+              <a href="static/NewsAndEvents..html" title="News & Events" target="_self">News & Events</a>
+              <a href="#.html" title="Sports Health & Fitness" target="_self">Sports Health & Fitness</a>
+              <a href="static/SportsICandy.html" title="SportsiCandy" target="_self"><i>SportsiCandy</i></a>
+              <a href="static/TechServices.html" title="Tech & Business Services" target="_self">Tech & Business Services</a>
+              <a href="static/Write4Kids2ProSports.html" title="Write4K2PS" target="_self">Write4K2PS</a>
+              <a href="static/Future Features.html" title="Future Features" target="_self">Future Features</a>
+          </footer>
+                <div class="dots clear">
+                </div>
+                <!-- Social Icon -->
+                <div class="clearfix">
+                    <div class="copyright">
+                        &copy; Copyright 2011<br>
+                        Kids2prosports.com</div>
+                    <div class="socialIcons">
+                        <a href="http://www.facebook.com/pages/Kids2ProSportscom/246679545408252" title="facebook" target="_self"><img alt="facebook" src="../images/facebook.png"></a>
+                <a href="http://www.myspace.com/kids2prosports" title="myspace" target="_self"\><img alt="myspace" src="../images/myspace.png"></a>
+                <a href="http://sports.groups.yahoo.com/group/Kids2ProSports/" title="yahoo" target="_self"><img alt="yahoo" src="../images/yahoo.png"></a>
+                <a href="http://www.youtube.com/user/Kids2ProSports?ytsession=z-2bpR1F6KkzxpJXqUAuSu8npv_EAufzd8UxWG-wO5M7JJFFtEn4bzGiAjxyK77nRARXqOXvl0_lHPWLZSbjPLH5W6VE-Awt2DS2O0P13TfAJJIPjPnsPg2r0pvhvlcPvhJAC41cGiHg_FmPuR7MnwCoUVwPrdqonK2wykowr7AfvwqJbBaiQ4qoO7Z7M7ixFyTv2MB6OnHSs0Ztf6LbmUb8dI6xfiexczjVBMOjViU" title="youtube" target="_self"><img alt="youtube" src="../images/youtube.png"></a>
+                <a href="http://www.reddit.com/r/sports/comments/pamgt/kids2prosports_expands_it_international_sports/?already_submitted=true" title="reddit" target="_self"><img alt="reddit" src="../images/reddit.png"></a>
+                <a href="http://www.linkedin.com/in/kids2prosports" title="linked" target="_self"><img alt="linkedin" src="../images/linkedin.png"></a>
+                    </div>
+                </div>
+                <!-- Social Icon -->
+            </div>
+            <!-- footer ends -->
+        </div>
+</body>
+</html>

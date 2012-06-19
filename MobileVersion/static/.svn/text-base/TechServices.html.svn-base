@@ -1,0 +1,147 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>TechServices</title>
+
+<link rel="shortcut icon" href="images/favicon.ico" type="image/png">
+<meta content="width=device-width; initial-scale=1; maximum-scale=1; user-scalable=0;" name="viewport">
+<link href="../css/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<div>
+  <div id="wraper">
+      <header>
+          <nav>
+              <ul class="clearfix">
+                  <li>
+                      <a href="#.html" title="home" target="#">Sports</a>
+                  </li>
+                  <li>
+                      <a href="#.html" title="mediakit" target="#">Articles</a>
+                  </li>
+                  <li>
+                      <a class="ui-link" href="#.html" title="faq" target="#">Teams</a>
+                  </li>
+                  <li>
+                      <a class="ui-link" href="#.html" title="feedback" target="#">Messages</a>
+                  </li>
+                  <li>
+                      <a class="ui-link" href="#.html" title="contactus" target="#">Fanclubs</a>
+                  </li>
+              </ul>
+          </nav>
+      </header>
+      <!-- header ends -->
+      <!-- container starts-->
+      <!-- inner menu starts-->
+<div class="innermenu">
+        <ul class="clearfix">
+        	<li>
+              <a href="#.html" title="home" target="#">Home</a>
+          </li>
+          <li class="sep"></li>
+          <li>
+              <a href="#.html" title="mediakit" target="#">Profile</a>
+          </li>
+          <li class="sep"></li>
+          <li>
+              <a class="ui-link" href="#.html" title="faq" target="#">MessageBoard</a>
+          </li>
+          <li class="StaticMenu">
+              <a href="#.html" title="home" target="#">Menu</a>
+          </li>
+        </ul>
+       </div>	
+       <!-- inner menu ends-->
+      <div class="contetns clearfix">
+      	<!-- left area starts-->
+      	<div class="contentLeft fLeft">
+      		<div class="innerwrapper">
+			<h6>K2PS Supportive Technology &amp; Internet Business Services</h6>
+            <p>K2PS offers numerous support services for our members. Our in-house developers are trained and experienced with a wide range of operating and database management systems, web development environments, marketing platforms and languages. We also offer independentvendor services as noted in advertisements placed on this page and throughout our site.</p><br>
+            <h6>Web Design</h6>
+            <ul class="list">
+                <li>Web Site Development, Design &amp; Hosting</li>
+                <li>Web Analytics</li>
+                <li>Domain Name Registration</li>
+                <li>Keyword Research</li>
+                <li>Customized Websites &amp; Sport Home Pages</li>
+                <li>Customized Sport Portals</li>
+            </ul><br>
+            <h6>Application Development</h6>
+            <ul class="list">
+                <li>Java, C/C++, PHP, ColdFusion, ASP and other Programming Languages.</li>
+                <li>Application Integration</li>
+                <li>Database Development</li>
+                <li>Remote Data Backup</li>
+                <li>Content Management Systems, Including Installation, Integration, and Support</li>
+                <li>Unique custom applications where required.</li>
+                <li>Efficient e-commerce/shopping cart applications</li>
+                <li>Shopping Cart Systems</li>
+                <li>Security, Anti-Virus and Firewalling</li>
+                <li>Networking, Programming and Security</li>
+                <li>Virtual Private Intranet</li>
+                <li>Email Anti-Spam Services &amp; email Broadcast & Hosting Services</li>
+                <li>Search Engine Optimization</li>
+                <li>Usability testing.</li>
+                <li>Consultation</li>
+            </ul><br>
+             <h6>Internet Business Development</h6>
+            <ul class="list">
+                <li>Business Concepts</li>
+                <li>Business Development</li>
+                <li>Business Strategies &amp; Research</li>
+                <li>Marketing Concepts</li>
+                <li>Equity &amp; Debt Investment</li>
+                <li>Intellectual Capital Investment</li>
+                <li>Partnership Opportunities</li>
+                <li>Application Development </li>
+                <li>Internet Business Development </li>
+            </ul>
+            <p>For Internet Business, Application or Web Design development assistance please submit your requests to <a href="mailto:Alan.Chokov@K2PS.com">Alan.Chokov@K2PS.com</a></p>
+                <p>Based on your service requirements, we will assist you in creating a plan to reach those goals. For more information contact us at <a href="mailto:Alan.Chokov@K2PS.com"> Alan.Chokov@K2PS.com</a></p>
+        </div>
+        </div>
+        <!-- leftarea ends-->
+        <!-- advertisement area starts-->
+        <div class="contentRight fRight">fdfplfpogjj</div>
+      </div>
+      <!-- container ends-->
+      <!-- footer starts -->
+      <div id="footerWrap">
+          <footer>
+              <a href="#.html" title="home" target="#">Home</a>
+              <a href="#.html" title="Affiliates" target="#">Affiliates</a>
+              <a href="#.html" title="Collegiate Recruiting" target="#">Collegiate Recruiting</a>
+              <a href="#.html" title="Philanthropy" target="#">Philanthropy</a>
+              <a href="#.html" title="Disability Sports" target="#">Disability Sports</a>
+              <a href="#.html" title="Education & Sports" target="#">Education & Sports</a>
+              <a href="#.html" title="K2psZOO" target="#">K2psZOO</a>
+              <a href="#.html" title="News & Events" target="#">News & Events</a>
+              <a href="#.html" title="Sports Health & Fitness" target="#">Sports Health & Fitness</a>
+              <a href="#.html" title="SportsiCandy" target="#"><i>SportsiCandy</i></a>
+              <a href="#.html" title="Tech & Business Services" target="#">Tech & Business Services</a>
+              <a href="#.html" title="Write4K2PS" target="#">Write4K2PS</a>
+              <a href="#.html" title="Future Features" target="#">Future Features</a>
+          </footer>
+          <div class="dots clear"></div>
+          <!-- Social Icon -->
+          <div class="clearfix">
+              <div class="copyright">&copy; Copyright 2011<br>Kids2prosports.com</div>
+              <div class="socialIcons">
+                <a href="#.html" title="facebook" target="#"><img alt="facebook" src="../images/facebook.png"></a>
+                <a href="#.html" title="myspace" target="#"><img alt="myspace" src="../images/myspace.png"></a>
+                <a href="#.html" title="yahoo" target="#"><img alt="yahoo" src="../images/yahoo.png"></a>
+                <a href="#.html" title="youtube" target="#"><img alt="youtube" src="../images/youtube.png"></a>
+                <a href="#.html" title="reddit" target="#"><img alt="reddit" src="../images/reddit.png"></a>
+                <a href="#.html" title="linked" target="#"><img alt="linkedin" src="../images/linkedin.png"></a>
+              </div>
+          </div>
+          <!-- Social Icon -->
+      </div>
+       <!-- footer ends -->
+  </div>
+</body>
+</html>

@@ -1,0 +1,482 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta charset="utf-8">
+<title>SportsDefinitions</title>
+
+<link rel="shortcut icon" href="images/favicon.ico" type="image/png">
+<meta content="width=device-width; initial-scale=1; maximum-scale=1; user-scalable=0;" name="viewport">
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<!--<link href="css/ui.jqgrid.css" rel="stylesheet" type="text/css">
+<link href="css/ui.multiselect.css" rel="stylesheet" type="text/css">-->
+
+<!--<link href="css/ui-lightness/jquery-ui-1.8.18.custom.css" rel="stylesheet" type="text/css">
+-->
+ <!--<style type="text/css">
+        .myGrid
+        {
+            width: 100%;
+            margin: 0px 0 0px 0;
+            border: solid 1px #525252;
+            border-collapse: collapse;
+            width: 600px;
+        }
+        .myGrid td
+        {
+            padding: 2px;
+            border: solid 1px #c1c1c1;
+            color: Black;
+            font-family: Arial,Helvetica,sans-serif;
+            font-size: 0.9em;
+            width:40px;
+            
+        }
+        .myGrid th
+        {
+            color: #fff;
+           
+            background-color:Purple;
+            font-family: Arial,Helvetica,sans-serif;
+            font-size: 0.9em;
+        }
+    </style>-->
+
+
+	<link rel="shortcut icon" type="image/ico" href="http://www.datatables.net/media/images/favicon.ico" />
+	<link href="media/css/demo_table.css" rel="stylesheet" type="text/css">
+    	<link href="media/css/demo_page.css" rel="stylesheet" type="text/css">
+	<!--<script type="text/javascript" src="js/jquery-1.4.2.js"></script>
+   <script type="text/javascript" src="js/i18n/grid.locale-en.js"></script>
+ 	<script type="text/javascript" src="js/src/grid.loader.js"></script>
+    <script type="text/javascript" src="json2.js" ></script>   
+        <script type="text/javascript" src="jquery.Storage.js" ></script>     -->
+    
+     <script src="js/jquery-1.4.2.min.js" type="text/javascript"></script>
+    <script src="js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script language="javascript" type="text/javascript">
+	
+        $(document).ready(function () {
+			
+            function renderTable(result) {
+                var dtData = [];
+                $.each(result, function () {
+                    dtData.push([
+                           this.Name,
+                           this.Sport
+                          
+                        ]);
+						
+						
+						
+                });
+
+                $('#SportsGrid').dataTable({ //grid is the id of the table
+                    'aaData': dtData,
+                    'bPaginate': true,
+                    'bInfo': true,
+					'bRetrieve':true,
+					"sPaginationType": "full_numbers",
+					
+                    'bFilter': true
+					
+                });
+				// wire up the ID in the data_grid table row and append to the URL to link to the form
+$('.SportsGrid tbody tr').click(function() {
+    var redirection = $(this).attr('Name');
+    document.location.href = "EditFormDashboard.aspx?FormId=" + redirection;
+}); 	
+				 
+       
+   
+            }
+
+            $.ajax({
+               url: 'http://2bvision.com/kids2promobile/SourceSportDataGrid.asmx/GetAllSports', 
+              type: 'POST', 
+              data: "{'HasGenderAge': '"+false+"','IsCountry':'"+false+"' ,'IsCollegeInt':'"+false+"','IsCollegeUSA':'"+false+"' ,'IsOlympic':'"+false+"'  ,'MajorSport':'Special Olympics','MajorSport2':'High School'}", 
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+					//alert(response.d);
+                    renderTable(response.d);
+                },
+                failure: function (errMsg) {
+                    $('#errorMessage').text(errMsg); //errorMessage is id of the div
+                }
+            });
+		
+			
+        });
+</script>
+</head>
+
+<body >
+<div>
+  <div id="wraper">
+      <header>
+          <nav>
+              <ul id="" class="clearfix">
+                  <li>
+                      <a href="userprofile.html" title="home" target="_self">Home</a>
+                  </li>
+                  <li>
+                      <a href="static/mediaKit.html" title="mediakit" target="_self">Media Kit</a>
+                  </li>
+                  <li>
+                      <a class="ui-link" href="static/Faq.html" title="faq" target="_self">FAQ</a>
+                  </li>
+                  <li>
+                      <a class="ui-link" href="#.html" title="feedback" target="#">Feedback</a>
+                  </li>
+                  <li>
+                      <a class="ui-link" href="static/ContactUs.html" title="contactus" target="_self">Contact Us</a>
+                  </li>
+              </ul>
+          </nav>
+      </header>
+      <!-- header ends -->
+      <!-- container starts-->
+      <div class="contetns clearfix">
+      	<!-- left area starts-->
+      	<div class="contentLeft fLeft">
+      		<div class="innerwrapper">
+        	<!-- contentLeft -->
+        		<div class="clear">
+          			<div class="note">
+          	  			<h2>Select a Sport</h2>
+              			<p>You have six options in choosing your sport. The first three are under the <b> General Sports , Special Olympics or Sports by Gender/ID tabs</b> below. Once you have made your selection you can select your sport by:</p>
+                        <ul>
+                          <li>Clicking on the alphabetical letter, which will take you to all sports beginning with that letter.</li>
+                          <li>Type in the Name of the Sport to Begin Search.</li>
+                          <li>You can Filter Results by Sport Category, which will provide you with all sports based on your selection.</li>
+                        </ul>
+                        <p> <b>Please note, after making a selection in either option (2) or (3) and you decide to</b> exercise the next option, make sure to click on <b>clear link</b>.
+                        </p>
+                        <p> <b>The next three options include Sports by Country, Sports by United State College/University Sports and International College/University Sports Tabs. For all six options, we encourage you to recommend a sport (and gender if desired) to be identified with any of the above tab selections. Send your request to</b> <a href="mailto:support@k2ps.com">support@k2ps.com</a> Once accepted by K2PS, the sport will be posted below in their respective sport tab and that sport home page will be created. 
+                        </p>
+                        <p><b>You can submit to any of these feature, and more from your profile …. in your languages of choice</b></p>
+                        <p><b>For selecting the Countries Tab</b> it will direct you to the list of countries we feature. The Countries Sport Home Pages are for all sports. When you click on your sport or country of choice it will redirect you to that country’s Home Page. We encourage you to submit your sport to the desired country and any country that may not be represented. Send your request to <a href="mailto:support@k2ps.com">support@k2ps.com</a> The Country Sport will be posted below the Country name and a sport home page will be created.
+                        </p>
+                        <p><b>For selecting the Sports by the Universities tab </b>tab it will direct you to the list of Colleges and Universities we feature. We encourage you to submit your sport to the desired college or university and any that may not be represented. Send your request to <a href="mailto:support@k2ps.com">support@k2ps.com</a> The sport will be posted below the College or University name and a sport home page will be created. From your profile account you can submit to any of these features, and more …. In your languages of choice. 
+                        </p>
+                        <p>hare to over 360 social networks and be notified when anything new is submitted to this sport. From your profile account you can submit to any of these features, and more …. In your languages of choice              
+                        </p>
+          			</div>
+         			<div class="note">
+                      <p><b>If you would prefer to have your own personalized sport, team, health & fitness, business, professional, educational, country, coaching or philanthropy home page</b> <a href="#" title="#">click here</a></p>
+          			</div>
+                   
+         
+    </div>
+                    
+                  <br />
+         			<div class="clearfix">
+            			<div class="sportSubNav fLeft">
+                <a href="SportsDefinitions.aspx">
+                    <span>General Sports</span>
+                </a>
+            </div>
+                        <div class="sportSubNav fLeft">
+                            <a href="SportsDefinitionsSpecialOlympics.aspx">
+                                <span>Special Olympics</span>
+                            </a>
+                        </div>
+                        <div class="sportSubNav fLeft">
+                            <a href="SportsDefinitionsGenderID.aspx">
+                                <span>Sports by Gender/ID</span>
+                             </a>
+                        </div>
+                        <div class="sportSubNav fLeft">
+                            <a href="SportsDefinitionsCountries.aspx">
+                                <span>Sports by Country</span>
+                            </a>
+                        </div>
+                        <div class="sportSubNav fLeft">
+                            <a href="#" title="#">
+                                <span>College/University Sports</span>
+                            </a>
+                        </div>
+          			</div>
+        		</div>
+                <br />
+                           <table id="SportsGrid" class="display">
+        <thead>
+            <tr>
+                <th>
+                   Name
+                </th>
+                <th>
+                   Sports
+                </th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="5">
+                    Loading....
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div id="errorMessage">
+                <!-- grid starts-->
+        <!--		<div class="generaicWrapper clearfix">
+            		<div class="paganation">
+                	<a href="#" title="#">A</a> 
+                    <a href="#" title="#">B</a>
+                    <a href="#" title="#">C</a>
+                    <a href="#" title="#">D</a>
+                    <a href="#" title="#">E</a>
+                    <a href="#" title="#">F</a>
+                    <a href="#" title="#">G</a>
+                    <a href="#" title="#">H</a>
+                    <a href="#" title="#">I</a>
+                    <a href="#" title="#">J</a>
+                   	<a href="#" title="#">K</a>
+                    <a href="#" title="#">L</a>
+                    <a href="#" title="#">M</a>
+                    <a href="#" title="#">N</a>
+                    <a href="#" title="#">O</a>
+                    <a href="#" title="#">P</a>
+                    <a href="#" title="#">Q</a>
+                    <a href="#" title="#">R</a>
+                    <a href="#" title="#">S</a>
+                    <a href="#" title="#">T</a>
+                    <a href="#" title="#">U</a>
+                    <a href="#" title="#">V</a>
+                    <a href="#" title="#">W</a>
+                    <a href="#" title="#">X</a>
+                    <a href="#" title="#">Y</a>
+                    <a href="#" title="#">Z</a>
+                </div>
+                	<div class="generalGrid">
+                	<div class="generalGrid_TopPanel">
+                    	<ul class="clearfix">
+                        	<li>Page 2 of 21 (1020 items)</li>
+                            <li><a class="grey_Bg" href="#" title="#">Prev</a></li>
+                            <li><a href="#" title="#">1</a></li>
+                            <li><a href="#" title="#">2</a></li>
+                            <li><a href="#" title="#">3</a></li>
+                            <li><a href="#" title="#">4</a></li>
+                            <li><a href="#" title="#">...</a></li>
+                            <li><a href="#" title="#">[21]</a></li>
+                            <li><a class="black_Bg" href="#" title="#">Next</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                    	<div class="gridHeading"></div>
+                        <div class="sport_search  clearfix">
+                        	<div class="fLeft number_Grid">clear</div>
+                            <div class="fLeft innerGrids"><input type="text" name="#"></div>
+                            <div class="fLeft innerGrids2">
+                            	<select>
+                                	<option value="#">Countries</option>
+									<option value="#">Martial Arts</option>
+                                    <option value="#">Sailing</option>
+                                    <option value="#">Countries</option>
+									<option value="#">Martial Arts</option>
+                                    <option value="#">Sailing</option>
+                                    <option value="#">Countries</option>
+									<option value="#">Martial Arts</option>
+                                    <option value="#">Sailing</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="innerGridsRow clearfix">
+                        	<div class="fLeft number_Grid">clear</div>
+                            <div class="fLeft innerGrids">dffdfdfdfdfdfdfdfdfddf</div>
+                            <div class="fLeft innerGrids2">fdfdfdfdfdfdfd</div>
+                        </div>
+                        <div class="innerGridsRow clearfix">
+                        	<div class="fLeft number_Grid">clear</div>
+                            <div class="fLeft innerGrids">dffdfdfdfdfdfdfdfdfddf</div>
+                            <div class="fLeft innerGrids2">fdfdfdfdfdfdfd</div>
+                        </div>
+                        <div class="innerGridsRow clearfix">
+                        	<div class="fLeft number_Grid">clear</div>
+                            <div class="fLeft innerGrids">dffdfdfdfdfdfdfdfdfddf</div>
+                            <div class="fLeft innerGrids2">fdfdfdfdfdfdfd</div>
+                        </div>
+                        <div class="innerGridsRow clearfix">
+                        	<div class="fLeft number_Grid">clear</div>
+                            <div class="fLeft innerGrids">dffdfdfdfdfdfdfdfdfddf</div>
+                            <div class="fLeft innerGrids2">fdfdfdfdfdfdfd</div>
+                        </div>
+                        <div class="innerGridsRow clearfix">
+                        	<div class="fLeft number_Grid">clear</div>
+                            <div class="fLeft innerGrids">dffdfdfdfdfdfdfdfdfddf</div>
+                            <div class="fLeft innerGrids2">fdfdfdfdfdfdfd</div>
+                        </div>
+                        <div class="innerGridsRow clearfix">
+                        	<div class="fLeft number_Grid">clear</div>
+                            <div class="fLeft innerGrids">dffdfdfdfdfdfdfdfdfddf</div>
+                            <div class="fLeft innerGrids2">fdfdfdfdfdfdfd</div>
+                        </div>
+                        <div class="innerGridsRow clearfix">
+                        	<div class="fLeft number_Grid">clear</div>
+                            <div class="fLeft innerGrids">dffdfdfdfdfdfdfdfdfddf</div>
+                            <div class="fLeft innerGrids2">fdfdfdfdfdfdfd</div>
+                        </div>
+                        <div class="innerGridsRow clearfix">
+                        	<div class="fLeft number_Grid">clear</div>
+                            <div class="fLeft innerGrids">dffdfdfdfdfdfdfdfdfddf</div>
+                            <div class="fLeft innerGrids2">fdfdfdfdfdfdfd</div>
+                        </div>
+                        <div class="innerGridsRow clearfix">
+                        	<div class="fLeft number_Grid">clear</div>
+                            <div class="fLeft innerGrids">dffdfdfdfdfdfdfdfdfddf</div>
+                            <div class="fLeft innerGrids2">fdfdfdfdfdfdfd</div>
+                        </div>
+                        <div class="innerGridsRow clearfix">
+                        	<div class="fLeft number_Grid">clear</div>
+                            <div class="fLeft innerGrids">dffdfdfdfdfdfdfdfdfddf</div>
+                            <div class="fLeft innerGrids2">fdfdfdfdfdfdfd</div>
+                        </div>
+                        <div class="innerGridsRow clearfix">
+                        	<div class="fLeft number_Grid">clear</div>
+                            <div class="fLeft innerGrids">dffdfdfdfdfdfdfdfdfddf</div>
+                            <div class="fLeft innerGrids2">fdfdfdfdfdfdfd</div>
+                        </div>
+                        <div class="innerGridsRow clearfix">
+                        	<div class="fLeft number_Grid">clear</div>
+                            <div class="fLeft innerGrids">dffdfdfdfdfdfdfdfdfddf</div>
+                            <div class="fLeft innerGrids2">fdfdfdfdfdfdfd</div>
+                        </div>
+                        <div class="innerGridsRow clearfix">
+                        	<div class="fLeft number_Grid">clear</div>
+                            <div class="fLeft innerGrids">dffdfdfdfdfdfdfdfdfddf</div>
+                            <div class="fLeft innerGrids2">fdfdfdfdfdfdfd</div>
+                        </div>
+                        <div class="innerGridsRow clearfix">
+                        	<div class="fLeft number_Grid">clear</div>
+                            <div class="fLeft innerGrids">dffdfdfdfdfdfdfdfdfddf</div>
+                            <div class="fLeft innerGrids2">fdfdfdfdfdfdfd</div>
+                        </div>
+                        <div class="innerGridsRow clearfix">
+                        	<div class="fLeft number_Grid">clear</div>
+                            <div class="fLeft innerGrids">dffdfdfdfdfdfdfdfdfddf</div>
+                            <div class="fLeft innerGrids2">fdfdfdfdfdfdfd</div>
+                        </div>
+                        <div class="innerGridsRow clearfix">
+                        	<div class="fLeft number_Grid">clear</div>
+                            <div class="fLeft innerGrids">dffdfdfdfdfdfdfdfdfddf</div>
+                            <div class="fLeft innerGrids2">fdfdfdfdfdfdfd</div>
+                        </div>
+                        <div class="innerGridsRow clearfix">
+                        	<div class="fLeft number_Grid">clear</div>
+                            <div class="fLeft innerGrids">dffdfdfdfdfdfdfdfdfddf</div>
+                            <div class="fLeft innerGrids2">fdfdfdfdfdfdfd</div>
+                        </div>
+                        <div class="innerGridsRow clearfix">
+                        	<div class="fLeft number_Grid">clear</div>
+                            <div class="fLeft innerGrids">dffdfdfdfdfdfdfdfdfddf</div>
+                            <div class="fLeft innerGrids2">fdfdfdfdfdfdfd</div>
+                        </div>
+                        <div class="innerGridsRow clearfix">
+                        	<div class="fLeft number_Grid">clear</div>
+                            <div class="fLeft innerGrids">dffdfdfdfdfdfdfdfdfddf</div>
+                            <div class="fLeft innerGrids2">fdfdfdfdfdfdfd</div>
+                        </div>
+                        <div class="innerGridsRow clearfix">
+                        	<div class="fLeft number_Grid">clear</div>
+                            <div class="fLeft innerGrids">dffdfdfdfdfdfdfdfdfddf</div>
+                            <div class="fLeft innerGrids2">fdfdfdfdfdfdfd</div>
+                        </div>
+                    </div>
+                    <div class="generalGrid_TopPanel">
+                    	<ul class="clearfix">
+                        	<li>Page 2 of 21 (1020 items)</li>
+                            <li><a class="grey_Bg" href="#" title="#">Prev</a></li>
+                            <li><a href="#" title="#">1</a></li>
+                            <li><a href="#" title="#">2</a></li>
+                            <li><a href="#" title="#">3</a></li>
+                            <li><a href="#" title="#">4</a></li>
+                            <li><a href="#" title="#">...</a></li>
+                            <li><a href="#" title="#">[21]</a></li>
+                            <li><a class="black_Bg" href="#" title="#">Next</a></li>
+                        </ul>
+                    </div>
+                </div>
+                	<div class="paganation">
+                	<a href="#" title="#">A</a> 
+                    <a href="#" title="#">B</a>
+                    <a href="#" title="#">C</a>
+                    <a href="#" title="#">D</a>
+                    <a href="#" title="#">E</a>
+                    <a href="#" title="#">F</a>
+                    <a href="#" title="#">G</a>
+                    <a href="#" title="#">H</a>
+                    <a href="#" title="#">I</a>
+                    <a href="#" title="#">J</a>
+                   	<a href="#" title="#">K</a>
+                    <a href="#" title="#">L</a>
+                    <a href="#" title="#">M</a>
+                    <a href="#" title="#">N</a>
+                    <a href="#" title="#">O</a>
+                    <a href="#" title="#">P</a>
+                    <a href="#" title="#">Q</a>
+                    <a href="#" title="#">R</a>
+                    <a href="#" title="#">S</a>
+                    <a href="#" title="#">T</a>
+                    <a href="#" title="#">U</a>
+                    <a href="#" title="#">V</a>
+                    <a href="#" title="#">W</a>
+                    <a href="#" title="#">X</a>
+                    <a href="#" title="#">Y</a>
+                    <a href="#" title="#">Z</a>
+                </div>
+                	<div class="sportsTab">
+                		<input type="button" name="#" value="Invite to Friends">
+                    	<input type="button" name="#" value="Impoart Contacts">
+                	</div>
+            	</div>-->
+                <!-- grid ends-->
+        	</div>
+            <br />    <br />    <br />    <br />
+            <div class="note">
+        		<p>The definitions and related features have been supplied by our research team and contributing sources. If you would like to contribute additional content to those features, we welcome your comments. You may also add your definition to our existing English interpretations. If you would like to suggest a new sport home page, including sport category, sport name, team, personalized sport home pages, gender, age, definitions, links, high school, college or universities; identification to inclusion of their sport home pages and any keywords associated with those sports, please <a href="#" title="#">Click Here to Submit Your Request.</a> All of these options can be submitted in your languages of choice. </p>
+        </div>
+        </div>
+        <!-- left area ends-->
+        <!-- advertisement area starts-->
+        <div class="contentRight fRight">fdfplfpogjj</div>
+        <!-- advertisement area ends-->
+      </div>
+      <!-- container ends-->
+      <!-- footer starts -->
+      <div id="footerWrap">
+          <footer>
+              <a href="userprofile.html" title="home" target="_self">Home</a>
+              <a href="static/Affiliates.html" title="Affiliates" target="_self">Affiliates</a>
+              <a href= "static/CollegiateRecruiting.html"title="Collegiate Recruiting" target="_self">Collegiate Recruiting</a>
+              <a href="#.html" title="Philanthropy" target="#">Philanthropy</a>
+              <a href="#.html" title="Disability Sports" target="#">Disability Sports</a>
+              <a href="static/Education.html" title="Education & Sports" target="_self">Education & Sports</a>
+              <a href= "static/K2psZOO.html"title="K2psZOO" target="_self">K2psZOO</a>
+              <a href= "static/NewsAndEvents..html"title="News & Events" target="_self">News & Events</a>
+              <a href="#.html" title="Sports Health & Fitness" target="_self">Sports Health & Fitness</a>
+              <a href="static/SportsICandy.html" title="SportsiCandy" target="_self"><i>SportsiCandy</i></a>
+              <a href="static/TechServices.html" title="Tech & Business Services" target="_self">Tech & Business Services</a>
+              <a href= "static/Write4Kids2ProSports.html"title="Write4K2PS" target="_self">Write4K2PS</a>
+              <a href="static/Future Features.html" title="Future Features" target="_self">Future Features</a>
+          </footer>
+          <div class="dots clear"></div>
+          <!-- Social Icon -->
+          <div class="clearfix">
+              <div class="copyright">&copy; Copyright 2011 Kids2prosports.com</div>
+              <div class="socialIcons">
+                 <a href="http://www.facebook.com/pages/Kids2ProSportscom/246679545408252" title="facebook" target="_self"><img alt="facebook" src="images/facebook.png"></a>
+              <a href="http://www.myspace.com/kids2prosports" title="myspace" target="_self"><img alt="myspace" src="images/myspace.png"></a>
+              <a href="http://sports.groups.yahoo.com/group/Kids2ProSports/" title="yahoo" target="_self"><img alt="yahoo" src="images/yahoo.png"></a>
+              <a href="http://www.youtube.com/user/Kids2ProSports?ytsession=z-2bpR1F6KkzxpJXqUAuSu8npv_EAufzd8UxWG-wO5M7JJFFtEn4bzGiAjxyK77nRARXqOXvl0_lHPWLZSbjPLH5W6VE-Awt2DS2O0P13TfAJJIPjPnsPg2r0pvhvlcPvhJAC41cGiHg_FmPuR7MnwCoUVwPrdqonK2wykowr7AfvwqJbBaiQ4qoO7Z7M7ixFyTv2MB6OnHSs0Ztf6LbmUb8dI6xfiexczjVBMOjViU" title="youtube" target="_self"><img alt="youtube" src="images/youtube.png"></a>
+              <a href="http://www.reddit.com/r/sports/comments/pamgt/kids2prosports_expands_it_international_sports/?already_submitted=true" title="reddit" target="_self"><img alt="reddit" src="images/reddit.png"></a>
+              <a href="http://www.linkedin.com/in/kids2prosports" title="linked" target="_self"><img alt="linkedin" src="images/linkedin.png"></a>
+              </div>
+          </div>
+          <!-- Social Icon -->
+      </div>
+       <!-- footer ends -->
+  </div>
+</body>
+</html>

@@ -1,0 +1,1165 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>my account</title>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/png" />
+    <meta content="width=device-width; initial-scale=1; maximum-scale=1; user-scalable=0;"
+        name="viewport" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <script src="js/jquery-1.4.2.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="js/jquery.Storage.js"></script>
+    <script type="text/javascript" src="js/jquery.jsonp-2.1.3.min.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.20/themes/base/jquery-ui.css"
+        type="text/css" media="all" />
+    <link rel="stylesheet" href="http://static.jquery.com/ui/css/demo-docs-theme/ui.theme.css"
+        type="text/css" media="all" />
+    <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>-->
+    <script src="http://code.jquery.com/ui/1.8.20/jquery-ui.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var online = navigator.onLine;    // Detecting the internet connection
+            if (online) {
+                // do your stuff
+            } else {
+                alert('You\'re Offline now...');
+                return false;
+            }
+
+
+            if ($.Storage.get("UserName") == null || $.Storage.get("UserName") == "")
+            { window.location.href = "login.html"; }
+            else if ($.Storage.get("UserName") == "guest") {
+                $('#btnSubmit').attr('disabled', 'disabled');
+                $('#btnAddChild').attr('disabled', 'disabled');
+           
+            }
+            $("#lblmessage").text("");
+            $("#lblmessageChild").text("");
+            $(function () {
+                $("#txtdateofbirth").datepicker();
+            });
+
+        });
+        var country, city, county, state;
+        var AllLanguages = null; var ReadLanguages = null; var SpokenLanguages = null;
+        $('#loadingmessage').show();
+        $.ajax(
+{
+    type: "POST",
+    url: "http://2bvision.com/kids2promobile/CascadingCitySelection.asmx/GetDropDownListCountry",
+    data: "{}",
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+
+    success: function (response, status) {
+        var select = document.getElementById("DropDownListCountry");
+        var Nationality = document.getElementById("DropDownListNationality");
+        Nationality.options.length = 0;
+        select.options.length = 0; // clear out existing items 
+        var countryList = response.d;
+        if (countryList != "") {
+            //$("#DropDownListCountry")[0].options.add( new Option("--------","0"));
+            for (i in countryList) {
+
+
+                Nationality.options[Nationality.options.length] = new Option(countryList[i].country, countryList[i].country);
+                select.options[select.options.length] = new Option(countryList[i].country, countryList[i].country);
+            }
+
+        }
+        else {
+            $("#DropDownListCountry")[0].options.add(new Option("--------", "0"));
+        }
+        $('#loadingmessage').hide();
+    },
+    failure: function (msg) {
+        alert(msg);
+    }
+});
+
+        //Get Dropdown list Usstates 
+        $('#loadingmessage').show();
+        $.ajax(
+{
+    type: "POST",
+    url: "http://2bvision.com/kids2promobile/CascadingCitySelection.asmx/GetDropDownListUsStates",
+    data: "{}",
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+
+    success: function (response, status) {
+        var select = document.getElementById("DropDownListUsStates");
+        select.options.length = 0; // clear out existing items 
+        var StatesList = response.d;
+        if (StatesList != "") {
+            //$("#DropDownListCountry")[0].options.add( new Option("--------","0"));
+            for (i in StatesList) {
+
+
+                select.options[select.options.length] = new Option(StatesList[i].state, StatesList[i].state);
+            }
+        }
+        else {
+            $("#DropDownListUsStates")[0].options.add(new Option("--------", "0"));
+        }
+        $('#loadingmessage').hide();
+    },
+    failure: function (msg) {
+        alert(msg);
+    }
+});
+
+        $.ajax(
+{
+    type: "POST",
+    url: "http://2bvision.com/kids2promobile/SearchService.asmx/GetLanguages",
+    data: "{}",
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+
+    success: function (response, status) {
+        var selectP = document.getElementById("DropDownListPLanguage");
+        var LanguageList = response.d;
+        for (i in LanguageList) {
+
+            selectP.options[selectP.options.length] = new Option(LanguageList[i].name, LanguageList[i].name);
+        }
+        var selectHeight = document.getElementById("DropDownListHeightFeet");
+        var selectinches = document.getElementById("DropDownListHeightInches");
+        for (var i = 0; i < 12; i++) {
+            selectHeight.options[selectHeight.options.length] = new Option(i, i);
+            selectinches.options[selectinches.options.length] = new Option(i, i);
+        }
+    }
+});
+        // GetUserType 
+        $('#loadingmessage').show();
+        $.ajax(
+{
+    type: "POST",
+    url: "http://2bvision.com/kids2promobile/UserProfileService.asmx/GetUserType",
+    data: "{}",
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+
+    success: function (response, status) {
+        var select = document.getElementById("DropDownListType");
+        select.options.length = 0; // clear out existing items 
+        var UserType = response.d;
+        if (UserType != "") {
+
+            for (i in UserType) {
+
+
+                select.options[select.options.length] = new Option(UserType[i].name, UserType[i].name);
+            }
+            LoadUserData();
+        }
+        else {
+            $("#DropDownListType")[0].options.add(new Option("------", "0"));
+            LoadUserData();
+        }
+        $('#loadingmessage').hide();
+    },
+    failure: function (msg) {
+        alert(msg);
+    }
+});
+        //Get Dropdown list GetAllLanguages 
+
+        $('#loadingmessage').show();
+        var data = { "UserName": $.Storage.get("UserName") };
+        $.ajax(
+{
+    type: "POST",
+    url: "http://2bvision.com/kids2promobile/UserInfo.asmx/GetAllLanguages",
+    data: JSON.stringify(data),
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+
+    success: function (response, status) {
+
+        AllLanguages = response.d;
+        GetLanguagesSpoken()
+        $('#loadingmessage').hide();
+    },
+    failure: function (msg) {
+        alert(msg);
+    }
+});
+
+        //Get Dropdown list GetLanguagesSpoken 
+        function GetLanguagesSpoken() {
+            $('#loadingmessage').show();
+            var data = { "UserName": $.Storage.get("UserName") };
+            $.ajax(
+{
+    type: "POST",
+    url: "http://2bvision.com/kids2promobile/UserInfo.asmx/GetLanguagesSpoken",
+    data: JSON.stringify(data),
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+
+    success: function (response, status) {
+        SpokenLanguages = response.d;
+        GetLanguagesRead();
+        $('#loadingmessage').hide();
+
+    },
+    failure: function (msg) {
+        alert(msg);
+    }
+});
+        }
+        //Get Dropdown list GetLanguagesRead 
+        function GetLanguagesRead() {
+            $('#loadingmessage').show();
+            var data = { "UserName": $.Storage.get("UserName") };
+            $.ajax(
+{
+    type: "POST",
+    url: "http://2bvision.com/kids2promobile/UserInfo.asmx/GetLanguagesRead",
+    data: JSON.stringify(data),
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+
+    success: function (response, status) {
+        ReadLanguages = response.d;
+
+        $('#loadingmessage').hide();
+        SetLanguagesListBoxes();
+    },
+    failure: function (msg) {
+        alert(msg);
+    }
+});
+        }
+        function SetLanguagesListBoxes() {
+            //AllLanguages,ReadLanguages,SpokenLanguages
+
+
+
+            if (SpokenLanguages != null && ReadLanguages != null) {
+                for (var i = 0; i < AllLanguages.length; i++) {
+
+                    if (AllLanguages[i] != "------") {
+
+                        if (SpokenLanguages[i] != "------" && SpokenLanguages[i] != null) {
+                            var selectP = document.getElementById("lbChoosen");
+
+                            selectP.options[selectP.options.length] = new Option(SpokenLanguages[i], SpokenLanguages[i]);
+
+                            var selectP = document.getElementById("lbAvailable");
+
+                            selectP.options[selectP.options.length] = new Option(AllLanguages[i], AllLanguages[i]);
+                        }
+                        else {
+
+                            var selectP = document.getElementById("lbAvailable");
+
+                            selectP.options[selectP.options.length] = new Option(AllLanguages[i], AllLanguages[i]);
+                        }
+
+                        if (ReadLanguages[i] != "------" && ReadLanguages[i] != null) {
+                            var selectP = document.getElementById("lbAvailableRead");
+
+                            selectP.options[selectP.options.length] = new Option(AllLanguages[i], AllLanguages[i]);
+                            var selectP = document.getElementById("lbChoosenRead");
+
+                            selectP.options[selectP.options.length] = new Option(ReadLanguages[i], ReadLanguages[i]);
+                        }
+                        else {
+                            var selectP = document.getElementById("lbAvailableRead");
+
+                            selectP.options[selectP.options.length] = new Option(AllLanguages[i], AllLanguages[i]);
+
+                        }
+                    }
+                }
+            }
+            else if (SpokenLanguages != null) {
+                for (var i = 0; i < AllLanguages.length; i++) {
+                    if (SpokenLanguages != null) {
+                        var selectP = document.getElementById("lbChoosen");
+
+                        selectP.options[selectP.options.length] = new Option(SpokenLanguages[i], SpokenLanguages[i]);
+
+                    }
+                    else {
+                        if (AllLanguages[i] != "------") {
+                            var selectP = document.getElementById("lbAvailable");
+                            selectP.options[selectP.options.length] = new Option(AllLanguages[i], AllLanguages[i]);
+
+                        }
+                    }
+
+                }
+            }
+            else if (ReadLanguages != null) {
+                for (var i = 0; i < AllLanguages.length; i++) {
+                    if (ReadLanguages[i] != null) {
+                        var selectP = document.getElementById("lbAvailableRead");
+                        selectP.options[selectP.options.length] = new Option(AllLanguages[i], AllLanguages[i]);
+
+                    }
+                    else {
+                        if (ReadLanguages[i] != "------") {
+                            var selectP = document.getElementById("lbChoosenRead");
+                            selectP.options[selectP.options.length] = new Option(ReadLanguages[i], ReadLanguages[i]);
+
+                        }
+                    }
+                }
+            }
+            else {
+                for (var i = 0; i < AllLanguages.length; i++) {
+                    var selectP = document.getElementById("lbAvailable");
+                    selectP.options[selectP.options.length] = new Option(AllLanguages[i], AllLanguages[i]);
+
+                }
+            }
+
+        }
+        function ShowCityText() {
+            $("#DropDownListCity").hide();
+            $("#HrefMyCity").hide();
+            $("#TextBoxChangeCity").show();
+            $("#HrefSerachCity").show();
+            $("#TextBoxChangeCity").show();
+        }
+        function HideCityText() {
+            $("#HrefMyCity").show();
+            $("#HrefSerachCity").hide();
+            $("#DropDownListCity").show();
+            $("#TextBoxChangeCity").hide();
+        }
+        $(function () {
+            $("#btnAdd1").click(function () {
+                $("#lbAvailable > option:selected").each(function () {
+                    $(this).remove().appendTo("#lbChoosen");
+                });
+            });
+
+            $("#btnRemove1").click(function () {
+                $("#lbChoosen > option:selected").each(function () {
+                    $(this).remove().appendTo("#lbAvailable");
+                });
+            });
+            $("#btnAdd2").click(function () {
+                $("#lbAvailableRead > option:selected").each(function () {
+                    $(this).remove().appendTo("#lbChoosenRead");
+                });
+            });
+
+            $("#btnRemove2").click(function () {
+                $("#lbChoosenRead > option:selected").each(function () {
+                    $(this).remove().appendTo("#lbAvailableRead");
+                });
+            });
+        });
+        $(function () {
+            $("#DropDownListCountry").change(function () {
+
+                country = $(this).find(":selected").val();
+                if (country != 'United States') {
+                    $('#DropDownListCounty').hide();
+                    $('#DropDownListCity').hide();
+                    $('#DropDownListUsStates').hide();
+                    $('#TextBoxChangeCity').show();
+                }
+                else if (country = 'United States') {
+                    $('#DropDownListCounty').show();
+                    $('#DropDownListCity').show();
+                    $('#DropDownListUsStates').show();
+                }
+               
+            });
+        });
+        $(function () {
+            $("#DropDownListUsStates").change(function () {
+
+                state = $(this).find(":selected").val();
+                
+                if (state != '0') {
+                    GetDropDownListCounty(state);
+                }
+                else { }
+
+            });
+        });
+        $(function () {
+            $("#DropDownListCounty").change(function () {
+                county = $(this).find(":selected").val();
+                //  alert(county);
+                if (county != '0') {
+                    GetDropDownListCity(county, state);
+                }
+                else { }
+
+            });
+        });
+        function GetDropDownListCity(county, state) {
+            $('#loadingmessage').show();
+            $.ajax(
+{
+
+    type: "POST",
+    url: "http://2bvision.com/kids2promobile/CascadingCitySelection.asmx/GetDropDownListCity",
+    data: "{county:'" + county + "','state':'" + state + "'}",
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+
+    success: function (response, status) {
+        //alert('Yahooooo');
+        var select = document.getElementById("DropDownListCity");
+        select.options.length = 0; // clear out existing items 
+
+        var cityList = response.d;
+        if (cityList != "") {
+            //$("#DropDownListCounty")[0].options.add( new Option("--------","0"));	
+            for (i in cityList) {
+                select.options[select.options.length] = new Option(cityList[i].city, cityList[i].city);
+            }
+        }
+        else {
+            $("#DropDownListCity")[0].options.add(new Option("--------", "0"));
+        }
+        $('#loadingmessage').hide();
+    },
+    failure: function (msg) { alert(msg); }
+});
+        }
+
+        function GetDropDownListCounty(state) {
+            /*var str = Gender;
+            var regx = /\'/;
+            str = str.replace(regx, "//");
+            alert(str);*/
+            $('#loadingmessage').show();
+            $.ajax(
+                {
+
+                    type: "POST",
+                    url: "http://2bvision.com/kids2promobile/CascadingCitySelection.asmx/GetDropDownListCounty",
+                    data: "{state:'" + state + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+
+                    success: function (response, status) {
+                        //alert('Yahooooo');
+                        var select = document.getElementById("DropDownListCounty");
+                        select.options.length = 0; // clear out existing items 
+
+                        var countyList = response.d;
+                        if (countyList != "") {
+                           
+                            for (i in countyList) {
+                                select.options[select.options.length] = new Option(countyList[i].county, countyList[i].county);
+                            }
+                            
+                        }
+                        else {
+                            $("#DropDownListCounty")[0].options.add(new Option("--------", "0"));
+                        }
+                        $('#loadingmessage').hide();
+                    },
+                    failure: function (msg) { alert(msg); }
+                });
+        }
+
+    </script>
+    <script type="text/javascript">
+
+        function LoadUserData() {
+            var data = { "UserName": $.Storage.get("UserName") };
+            $.ajax(
+{
+    type: "POST",
+    url: "http://2bvision.com/kids2promobile/UserInfo.asmx/LoadUserData",
+    data: JSON.stringify(data),
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+
+    success: function (response, status) {
+
+
+        var user = response.d;
+        $("#imgProfilePic").attr("src","http://www.kids2prosports.com/"+user[0].ProfileImageUrl);
+        $("#txtFirstName").val(user[0].FirstName);
+        $("#txtLastName").val(user[0].LastName);
+
+        if (user[0].City != "------" && user[0].City != "undefined" && user[0].City != "0") {
+            $("#DropDownListCity").val(user[0].City);
+
+        }
+
+        if (user[0].State != "------" && user[0].State != "undefined" && user[0].State != "0") {
+            $("#DropDownListUsStates").val(user[0].State);
+        }
+
+        if (user[0].County != "------" && user[0].County != "undefined" && user[0].County != "0") {
+            $("#DropDownListCounty").val(user[0].County);
+        }
+
+        if (user[0].Country != "------" || user[0].Country != "undefined" && user[0].Country != "0") {
+            $("#DropDownListCountry").val(user[0].Country);
+        }
+
+        $("#TextBoxChangeCity").val(user[0].City);
+        $("#TextBoxEmail").val(user[0].Email);
+        $("#TextBoxEmailAlt").val(user[0].Email2);
+        $("#TextBoxHomePhone").val(user[0].HomePhone);
+        $("#TextBoxMobilePhone").val(user[0].MobilePhone);
+        $("#TextBoxBusinessPhone").val(user[0].BusinessPhone);
+        $("#TextBoxBio").val(user[0].Bio);
+        if (user[0].AccountType != "------" && user[0].AccountType != "undefined" && user[0].AccountType != "0") {
+            $("#DropDownListType").val(user[0].AccountType);
+        }
+
+        if (user[0].Language != "------" && user[0].Language != "undefined" && user[0].Language != "0") {
+            $("#DropDownListPLanguage").val(user[0].Language);
+        }
+
+        if (user[0].AccountType != "------" && user[0].AccountType != "undefined" && user[0].AccountType != "0") {
+            $("#DropDownListType").val(user[0].AccountType);
+        }
+
+        if (user[0].Security != "------" && user[0].Security != "undefined" && user[0].Security != "0") {
+            $("#DropDownListSecurity").val(user[0].Security);
+        }
+        $("#TextBoxWeight").val(user[0].Weight);
+        if (user[0].Nationality != "------" && user[0].Nationality != "undefined" && user[0].Nationality != "0") {
+            $("#DropDownListNationality").val(user[0].Nationality);
+        }
+        if (user[0].Gender != "------" && user[0].Gender != "undefined" && user[0].Gender != "0") {
+            $("#DropDownListGender").val(user[0].Gender);
+        }
+        $("#txtAlternateName").val(user[0].AlternateName);
+        $("#txtMaidenName").val(user[0].MaidenName);
+
+        if (user[0].Prefix != "------" && user[0].Prefix != "undefined" && user[0].Prefix != "0") {
+            $("#DropDownListPrefix").val(user[0].Prefix);
+        }
+        $("#txtMiddleName").val(user[0].MiddleName);
+        $("#TextBoxFax").val(user[0].Fax);
+        $("#TextBoxHomePageName").val(user[0].HomePhone);
+        $("#TextBoxHomePageUrl").val(user[0].WebPageUrl);
+        $("#TextBoxWeight").val(user[0].Weight);
+
+        $("#TextBoxBusinessWebSiteName").val(user[0].businessWebPageName);
+        $("#TextBoxBusinessWebSiteUrl").val(user[0].businessWebPageUrl);
+        $("#TextBoxOtherTalents").val(user[0].otherTalents);
+        $("#TextBoxGoals").val(user[0].goals);
+        $("#TextBoxBusinessWebSiteName").val(user[0].WebPageName);
+        $("#TextBoxCoachNeeds").val(user[0].coachNeeds);
+
+
+    },
+    failure: function (msg) {
+        alert(msg);
+    }
+});
+        }
+       
+    
+    </script>
+    <script type="text/javascript">
+        function SaveUser() {
+            var user = {};
+            var DEFAULT_DROPDOWN_ITEM = "0";
+            var listOfLanguagesSpoken = [];
+            var listOfLanguagesRead = [];
+            var languagesSpoken = $("#lbChoosen").val();            // //  
+            var languagesRead = $("#lbChoosenRead").val(); // document.getElementById("lbChoosenRead");
+            if(languagesSpoken!=null && languagesSpoken!="undefined")
+            {
+            for (var i = 0; i < languagesSpoken.length; i++) {
+                listOfLanguagesSpoken.push(languagesSpoken[i]);
+            }
+            }
+            if(languagesRead!=null && languagesRead!="undefined")
+            {
+            for (var i = 0; i < languagesRead.length; i++) {
+                listOfLanguagesRead.push(languagesRead[i]);
+            }
+            }
+
+            user.FirstName = $("#txtFirstName").val();
+            user.LastName = $("#txtLastName").val();
+            if ($("#DropDownListCity").val() != "------" && $("#DropDownListCity").val() != "0") {
+                user.City = $("#DropDownListCity").val();
+            }
+            else { user.City = null; }
+            if ($("#DropDownListUsStates").val() != "------"&& $("#DropDownListUsStates").val() != "0") {
+                user.State = $("#DropDownListUsStates").val();
+            }
+            else { user.State = null; }
+            if ($("#DropDownListCounty").val() != "------"&& $("#DropDownListCounty").val() != "0") {
+                user.County = $("#DropDownListCounty").val();
+            }
+            else { user.County = null; }
+            if ($("#DropDownListCountry").val() != "------" && $("#DropDownListCountry").val() != "0")  {
+                user.Country = $("#DropDownListCountry").val();
+            }
+            else { user.Country = null; }
+            if ($("#DropDownListPLanguage").val() != "------" && $("#DropDownListPLanguage").val() != "0") {
+                user.Language = $("#DropDownListPLanguage").val();
+            }
+            else { user.Language = null; }
+
+            user.Email = $("#TextBoxEmail").val();
+            user.Email2 = $("#TextBoxEmailAlt").val();
+            user.HomePhone = $("#TextBoxHomePhone").val();
+            user.MobilePhone = $("#TextBoxMobilePhone").val();
+            user.BusinessPhone = $("#TextBoxBusinessPhone").val();
+            user.Bio = $("#TextBoxBio").val();
+
+            if ($("#DropDownListType").val() == "0") {
+                user.AccountType = "";
+            }
+            else {
+                user.AccountType = $("#DropDownListType").val();
+            }
+            user.Security = $("#DropDownListSecurity").val();
+            if ($("#txtdateofbirth").val() != null) {
+                user.DateOfBirth = $("#txtdateofbirth").val();
+            }
+            else { user.DateOfBirth = "190000101"; }
+
+            if ($("#DropDownListHeightFeet").val() == "-1" && $("#DropDownListHeightInches").val() == "-1") {
+                user.Height = "";
+            }
+            else {
+                user.Height = $("#DropDownListHeightFeet").val() + " Foot " + $("#DropDownListHeightInches").val() + " Inches";
+            }
+            user.Weight = $("#TextBoxWeight").val();
+            if ($("#DropDownListNationality").val() != "0")
+            { user.Nationality = $("#DropDownListNationality").val(); }
+            else { user.Nationality = ""; }
+            if ($("#DropDownListGender").val() != "0")
+            { user.Gender = $("#DropDownListGender").val(); }
+            else { user.Gender = ""; }
+
+            user.AlternateName = $("#txtAlternateName").val();
+            user.MaidenName = $("#txtMaidenName").val();
+            if ($("#DropDownListPrefix").val() == "0") {
+                user.Prefix = "";
+            }
+            else {
+                user.Prefix = $("#DropDownListPrefix").val();
+            }
+            user.MiddleName = $("#txtMiddleName").val();
+            user.Fax = $("#TextBoxFax").val();
+            user.HomePhone = $("#TextBoxHomePageName").val();
+            user.WebPageUrl = $("#TextBoxHomePageUrl").val();
+            user.LanguagesRead = listOfLanguagesRead;
+            user.LanguagesSpoken = listOfLanguagesSpoken;
+            user.businessWebPageName = $("#TextBoxBusinessWebSiteName").val();
+            user.businessWebPageUrl = $("#TextBoxBusinessWebSiteUrl").val();
+            user.otherTalents = $("#TextBoxOtherTalents").val();
+            user.goals = $("#TextBoxGoals").val();
+            user.WebPageName = $("#TextBoxBusinessWebSiteName").val();
+            user.coachNeeds = $("#TextBoxCoachNeeds").val();
+            user.UserName = $.Storage.get("UserName");
+            user.Age = 0;
+            var data = { "UserName": $.Storage.get("UserName"), "LanguagesSpoken": listOfLanguagesSpoken, "LanguagesRead": listOfLanguagesRead, "user": user };
+            $.ajax(
+{
+    type: "POST",
+    url: "http://2bvision.com/kids2promobile/UserInfo.asmx/SaveUser",
+    data: JSON.stringify(data),
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+
+    success: function (response, status) {
+        $("#lblmessage").text("Result saved to see changes please visit profile page");
+
+    },
+    failure: function (msg) {
+        alert(msg);
+    }
+});
+
+}
+function AddChild() {
+    if ($("#TextBoxChildUserName").val() != "") {
+        window.location.href = "MyAccount.html"
+    }
+    else {
+        $("#lblmessageChild").text("Please enter child Name");
+        
+     }
+
+}
+    </script>
+</head>
+<body>
+    <div>
+        <div id="wraper">
+            <header>
+          <nav>
+              <ul id="" class="clearfix">
+                  <li>
+                      <a href="index.html" title="home" target="_self">home</a>
+                  </li>
+                  <li>
+                      <a href="static/mediaKit.html" title="mediakit" target="_self">Media Kit</a>
+                  </li>
+                  <li>
+                      <a class="ui-link" href="static/Faq.html" title="faq" target="_self">FAQ</a>
+                  </li>
+                  <li>
+                      <a class="ui-link" href="feedback.html" title="feedback" target="_self">Feedback</a>
+                  </li>
+                  <li>
+                      <a class="ui-link" href="contactus.html" title="contactus" target="_self">Contact Us</a>
+                  </li>
+              </ul>
+          </nav>
+      </header>
+            <!-- header ends -->
+            <!-- container starts-->
+           
+            <div class="innermenu">
+       <ul class="clearfix">
+        	<li>
+              <a href="index.html" title="home" target="_self">Home</a>
+          </li>
+          <li class="sep"></li>
+          <li>
+              <a href="userprofile.html" title="profile" target="_self">Profile</a>
+          </li>
+          </ul>
+       </div>	
+            <div class="contetns clearfix">     <!-- myaccount starts -->
+                <div class="myAccBG">
+                    <div class="myaccHeading">
+                        Welcome to the My Account Page
+                    </div>
+                    <div class="notes">
+                        <p>
+                            The 'My Account' page is where you can create and update all of your personal information.
+                            You can also add multiple sports and sport related profiles as well as profiles
+                            for your children who are under the age of thirteen. Although it is recommended
+                            you respond to as many questions for interacting, making connections and establishing
+                            your sports legacy, submitting to all of the questions is not a requirement.</p>
+                        <p>
+                            The 'My Account' page is where you can create and update all of your personal information.
+                            You can also add multiple sports and sport related profiles as well as profiles
+                            for your children who are under the age of thirteen. Although it is recommended
+                            you respond to as many questions for interacting, making connections and establishing
+                            your sports legacy, submitting to all of the questions is not a requirement. To
+                            start creating, sharing and preserving your sports legacy proceed to our <a href="#"
+                                title="">Timeline Feature link to submit your content, videos, articles and pertinent
+                                information of your sport and sport related activities, highlights, events, awards,
+                                testimonials, educational achievements…. and more, in your preferred languages.</a></p>
+                        <p>
+                            If You Need Help please go to our Profile FAQ here. If your question is not answered,
+                            please forward it to <a href="mailto:support@k2ps.com"></a>
+                        </p>
+                    </div>
+                    <div class="profileWrap">
+                    <div class="errorLogin">
+                    <label id="lblmessage"></label>
+                    </div>
+                        <h2>
+                            Name</h2>
+                        <div class="set">
+                            <label>
+                                Prefix</label>
+                            <select class="selecrwidth" id="DropDownListPrefix">
+                                <option selected="true" value="0">--------</option>
+                                <option value="Dr">Dr</option>
+                                <option value="Mr">Mr</option>
+                                <option value="Ms">Ms</option>
+                                <option value="Mrs">Mrs</option>
+                                <option value="Prof">Prof</option>
+                            </select>
+                        </div>
+                        <div class="set">
+                            <label>
+                                First Name:</label>
+                            <input class="inputwidth" id="txtFirstName" type="text"  />
+                        </div>
+                        <div class="set">
+                            <label>
+                                Last Name:</label>
+                            <input class="inputwidth" id="txtLastName" type="text"  />
+                        </div>
+                        <div class="set">
+                            <label>
+                                Alternate Name:</label>
+                            <input class="inputwidth" id="txtAlternateName" type="text"  />
+                        </div>
+                        <div class="set">
+                            <label>
+                                Middle Name:</label>
+                            <input class="inputwidth" id="txtMiddleName" type="text"  />
+                        </div>
+                        <div class="set">
+                            <label>
+                                Maiden Name:</label>
+                            <input class="inputwidth" id="txtMaidenName" type="text"  />
+                        </div>
+                    </div>
+                    <div class="profileWrap">
+                        <h2>
+                            Profile Picture</h2>
+                       <!-- <h3>
+                            Format must be png, jpeg, png, or bmp</h3>-->
+                        <div class="profileImg">
+                            <img id="imgProfilePic" src="" alt="www.kids2prosports.com/unknown_profilepic.jpg"   />
+                        </div>
+                        <!--<a href="#" title="">Upload Through Webcam</a>-->
+                       <!-- <div class="set">
+                            <input type="file" />
+                        </div>-->
+                    </div>
+                    <div class="profileWrap">
+                        <h2>
+                            Location and Account Information</h2>
+                        <div class="set">
+                            <label>
+                                Country</label>
+                            <select name="DropDownListCountry" id="DropDownListCountry">
+                                <option selected="true" value="0">--------</option>
+                            </select>
+                        </div>
+                        <div class="set">
+                            <label>
+                                State</label>
+                            <select name="DropDownListUsStates" id="DropDownListUsStates">
+                                <option value="0" selected="true">--------</option>
+                            </select>
+                        </div>
+                        <div class="set">
+                            <label>
+                                County</label>
+                            <select name="DropDownListCounty" id="DropDownListCounty">
+                                <option value="0" selected="true">--------</option>
+                            </select>
+                        </div>
+                        <div class="set">
+                            <label>
+                                City</label>
+                            <select name="DropDownListCity" id="DropDownListCity">
+                                <option value="0" selected="true">--------</option>
+                            </select>
+                            <br />
+                            <input name="TextBoxChangeCity" id="TextBoxChangeCity" type="text" />
+                            <br />
+                            <a onclick="ShowCityText()" id="HrefMyCity" title="My City is Not Listed">My City is
+                                Not Listed</a>
+                            <br />
+                            <a onclick="HideCityText()" id="HrefSerachCity" title="Search Cities in My Country">
+                                Search Cities in My County</a>
+                        </div>
+                        <div class="set">
+                            <label>
+                                Account Type</label>
+                            <select class="selecrwidth" id="DropDownListType">
+                                <option value="0" selected="true">------</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- contact information -->
+                    <div class="profileWrap">
+                        <h2>
+                            Contact Information</h2>
+                        <div class="set">
+                            <label>
+                                Primary Email Address:</label>
+                            <input class="inputwidth" id="TextBoxEmail" type="text" />
+                        </div>
+                        <div class="set">
+                            <label>
+                                Alternate Email Address:</label>
+                            <input class="inputwidth" id="TextBoxEmailAlt" type="text" />
+                        </div>
+                        <div class="set">
+                            <label>
+                                Home Phone:</label>
+                            <input class="inputwidth" id="TextBoxHomePhone" type="text" />
+                        </div>
+                        <div class="set">
+                            <label>
+                                Mobile Phone:</label>
+                            <input class="inputwidth" id="TextBoxMobilePhone" type="text" />
+                        </div>
+                        <div class="set">
+                            <label>
+                                Business Phone:</label>
+                            <input class="inputwidth" id="TextBoxBusinessPhone" type="text" />
+                        </div>
+                        <div class="set">
+                            <label>
+                                Fax:</label>
+                            <input class="inputwidth" id="TextBoxFax" type="text" />
+                        </div>
+                        <h5>
+                            Website</h5>
+                        <div class="set">
+                            <label>
+                                Page Name:</label>
+                            <input class="inputwidth" id="TextBoxHomePageName" type="text" />
+                        </div>
+                        <div class="set">
+                            <label>
+                                Page Url:</label>
+                            <input class="inputwidth" id="TextBoxHomePageUrl" type="text" />
+                        </div>
+                        <h5>
+                            Business Website</h5>
+                        <div class="set">
+                            <label>
+                                Page Name:</label>
+                            <input class="inputwidth" id="TextBoxBusinessWebSiteName" type="text" />
+                        </div>
+                        <div class="set">
+                            <label>
+                                Page Url:</label>
+                            <input class="inputwidth" id="TextBoxBusinessWebSiteUrl" type="text" />
+                        </div>
+                    </div>
+                    <!-- messenger -->
+                    <div class="profileWrap">
+                        <h2>
+                            Contact Information</h2>
+                        <div class="set">
+                            <label>
+                                IM:</label>
+                            <input class="inputwidth" id="txtIM" type="text" />
+                        </div>
+                        <div class="set">
+                            <label>
+                                AIM:</label>
+                            <input class="inputwidth" id="txtAIM" type="text" />
+                        </div>
+                        <div class="set">
+                            <label>
+                                Skype:</label>
+                            <input class="inputwidth" id="txtSkype" type="text" />
+                        </div>
+                        <div class="set">
+                            <label>
+                                Windows Live Messenger:</label>
+                            <input class="inputwidth" id="txtMSN" type="text" />
+                        </div>
+                        <div class="set">
+                            <label>
+                                Yahoo Messenger:</label>
+                            <input class="inputwidth" id="txtYahoo" type="text" />
+                        </div>
+                        <div class="set">
+                            <label>
+                                ICQ:</label>
+                            <input class="inputwidth" id="txtICQ" type="text" />
+                        </div>
+                        <div class="set">
+                            <label>
+                                Google Talk</label>
+                            <input class="inputwidth" id="txtGTalk" type="text" />
+                        </div>
+                    </div>
+                    <!-- messenger -->
+                    <div class="profileWrap">
+                        <h2>
+                            Language Information</h2>
+                        <div class="set">
+                            <label>
+                                Primary Language:</label>
+                            <select name="DropDownListPLanguage" id="DropDownListPLanguage">
+                                <option selected="true" value="0">--------</option>
+                            </select>
+                        </div>
+                        <div class="set">
+                            <label>
+                                Spoken Languages:</label>
+                            <div class="clearfix">
+                                <div class="fLeft">
+                                    <span>Available:</span>
+                                    <select id="lbAvailable" multiple="multiple">
+                                    </select>
+                                </div>
+                                <div class="addbtn fLeft">
+                                    <input type="button" id="btnAdd1" value="Add" /><br />
+                                    <input type="button" id="btnRemove1" value="Remove" />
+                                </div>
+                                <div class="fLeft">
+                                    <span>Chosen:</span>
+                                    <select multiple="multiple" id="lbChoosen">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="set">
+                            <label>
+                                Languages Read:</label>
+                            <div class="clearfix">
+                                <div class="fLeft">
+                                    <span>Available:</span>
+                                    <select multiple="multiple" id="lbAvailableRead">
+                                    </select>
+                                </div>
+                                <div class="addbtn fLeft">
+                                    <input type="button" id="btnAdd2" value="Add" /><br />
+                                    <input type="button" id="btnRemove2" value="Remove" />
+                                </div>
+                                <div class="fLeft">
+                                    <span>Chosen:</span>
+                                    <select id="lbChoosenRead" multiple="multiple">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- additional info -->
+                    <div class="profileWrap">
+                        <h2>
+                            Additional Information</h2>
+                        <div class="set">
+                            <label>
+                                Height:</label>
+                            <select class="adddheight" id="DropDownListHeightFeet">
+                                <option selected="true" value="-1">--------</option>
+                            </select>
+                            <select class="adddheight" id="DropDownListHeightInches">
+                                <option selected="true" value="-1">--------</option>
+                            </select>
+                        </div>
+                        <div class="set">
+                            <label>
+                                Account Security:</label>
+                            <select class="adddheight" id="DropDownListSecurity">
+                                <option selected="true" value="Private">Private</option>
+                                <option value="Protected">Protected</option>
+                                <option value="Public">Public</option>
+                            </select>
+                        </div>
+                        <div class="set">
+                            <label>
+                                Gender:</label>
+                            <select class="selectGgender" id="DropDownListGender">
+                                <option selected="true" value="0">--------</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+                        <div class="set">
+                            <label>
+                                Weight (lbs):</label>
+                            <input class="inputwidth" id="TextBoxWeight" type="text" />
+                        </div>
+                        <div class="set">
+                            <label>
+                                Country of Origin:</label>
+                            <select class="selecrwidth22" id="DropDownListNationality">
+                                <option selected="true" value="0">--------</option>
+                            </select>
+                        </div>
+                        <div class="set">
+                            <label>
+                                Date of Birth:</label>
+                            <input type="text" id="txtdateofbirth" />
+                        </div>
+                        <div class="set">
+                            <label>
+                                Coach:</label>
+                            <textarea id="TextBoxCoachNeeds" rows="3" cols="20">
+                    
+                    </textarea>
+                        </div>
+                        <div class="set">
+                            <label>
+                                BIO:</label>
+                            <textarea id="TextBoxBio" rows="3" cols="20">
+                    
+                    </textarea>
+                        </div>
+                        <div class="set">
+                            <label>
+                                Other Talents:</label>
+                            <textarea id="TextBoxOtherTalents" rows="3" cols="20">
+                    
+                    </textarea>
+                        </div>
+                        <div class="set">
+                            <label>
+                                Goals:</label>
+                            <textarea id="TextBoxGoals" rows="3" cols="20">
+                    
+                    </textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="myAccBG" style="margin: 20px 0;">
+                    <h2>
+                        Family Account</h2>
+                    <p>
+                        Parents, Guardians, or other Legal Caregivers, make your account a 'Family Account'
+                        by adding your children. As a Family Account you can create an update of your child's
+                        profile just like you would your own profile. Profiles created by Family for their
+                        children can only be modified through the Family account. Enter a user name for
+                        your child and click 'Add Child' below to get started.</p>
+                    <div class="set">
+                        <input type="text" id="TextBoxChildUserName" style="width: 200px;" />
+                        <input type="button" id="btnAddChild" value="Add Child" onclick="AddChild()" />
+                        <br />
+                        <div class="errorLogin">
+                        
+                        <label id="lblmessageChild"></label>
+                        </div>
+                    </div>
+                </div>
+                <!-- myaccount ends -->
+                <div class="msubmitBtn">
+                    <input type="button" id="btnSubmit" name="btnSumit" value="Save All Changes" onclick="SaveUser()" /></div>
+            </div>
+            <!-- container ends-->
+            <!-- footer starts -->
+            <div id="footerWrap">
+                <footer>
+              <a href="index.html" title="home" target="_self">Home</a>
+              <a href="static/Affiliates.html" title="Affiliates" target="_self">Affiliates</a>
+              <a href= "static/CollegiateRecruiting.html"title="Collegiate Recruiting" target="_self">Collegiate Recruiting</a>
+           <!--   <a href="#.html" title="Philanthropy" target="#">Philanthropy</a>
+              <a href="#.html" title="Disability Sports" target="#">Disability Sports</a>-->
+              <a href="static/Education.html" title="Education & Sports" target="_self">Education & Sports</a>
+              <a href= "static/K2psZOO.html"title="K2psZOO" target="_self">K2psZOO</a>
+              <a href= "static/NewsAndEvents.html"title="News & Events" target="_self">News & Events</a>
+           <!--   <a href="#.html" title="Sports Health & Fitness" target="_self">Sports Health & Fitness</a>-->
+              <a href="static/SportsICandy.html" title="SportsiCandy" target="_self"><i>SportsiCandy</i></a>
+              <a href="static/TechServices.html" title="Tech & Business Services" target="_self">Tech & Business Services</a>
+              <a href= "static/Write4Kids2ProSports.html"title="Write4K2PS" target="_self">Write4K2PS</a>
+              <a href="static/FutureFeatures.html" title="Future Features" target="_self">Future Features</a>
+          </footer>
+                <div class="dots clear">
+                </div>
+                <!-- Social Icon -->
+                <div class="clearfix">
+                    <div class="copyright">
+                        &copy; Copyright 2011 Kids2prosports.com</div>
+                    <div class="socialIcons">
+                        <a href="http://www.facebook.com/pages/Kids2ProSportscom/246679545408252" title="facebook"
+                            target="_self">
+                            <img alt="facebook" src="images/facebook.png"></a> <a href="http://www.myspace.com/kids2prosports"
+                                title="myspace" target="_self">
+                                <img alt="myspace" src="images/myspace.png"></a> <a href="http://sports.groups.yahoo.com/group/Kids2ProSports/"
+                                    title="yahoo" target="_self">
+                                    <img alt="yahoo" src="images/yahoo.png"></a> <a href="http://www.youtube.com/user/Kids2ProSports?ytsession=z-2bpR1F6KkzxpJXqUAuSu8npv_EAufzd8UxWG-wO5M7JJFFtEn4bzGiAjxyK77nRARXqOXvl0_lHPWLZSbjPLH5W6VE-Awt2DS2O0P13TfAJJIPjPnsPg2r0pvhvlcPvhJAC41cGiHg_FmPuR7MnwCoUVwPrdqonK2wykowr7AfvwqJbBaiQ4qoO7Z7M7ixFyTv2MB6OnHSs0Ztf6LbmUb8dI6xfiexczjVBMOjViU"
+                                        title="youtube" target="_self">
+                                        <img alt="youtube" src="images/youtube.png"></a> <a href="http://www.reddit.com/r/sports/comments/pamgt/kids2prosports_expands_it_international_sports/?already_submitted=true"
+                                            title="reddit" target="_self">
+                                            <img alt="reddit" src="images/reddit.png"></a> <a href="http://www.linkedin.com/in/kids2prosports"
+                                                title="linked" target="_self">
+                                                <img alt="linkedin" src="images/linkedin.png"></a>
+                    </div>
+                </div>
+                <!-- Social Icon -->
+            </div>
+            <!-- footer ends -->
+        </div>
+</body>
+</html>

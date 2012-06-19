@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery File Upload without Flash</title>
+    <!-- <link rel="stylesheet" type="text/css" media="all" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/ui-darkness/jquery-ui.css" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js">
+    </script>
+    <script src="js/jquery.fileupload.js" type="text/javascript"></script>  
+   
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js">-->
+    <!--</script>-->
+    <!--   <script type="text/javascript">
+        $(function () {
+            $("#fileuplod").fileupload({
+                replaceFileInput: false,
+                dataType: 'JSON',
+                data: { "fileName": 'abc.jpb' },
+                url: "UploadHandler1.ashx",
+
+                done: function (e, data) {
+
+                },
+                error: function (errorText) {
+                    debugger;
+                    alert('Server Method is not called due to ' + errorText);
+                }
+            });
+
+
+        });
+
+    </script>-->
+    <script src="js/jquery-1.4.2.js" type="text/javascript"></script>
+    <script src="js/ajaxfileupload.js" type="text/javascript"></script>
+    <script type="text/javascript">
+            $(function () {
+                new AjaxUpload('#UploadButton', {
+                    action: 'UploadHandler1.ashx',
+                    onComplete: function (file, response) {
+                        
+                    },
+                    onSubmit: function (file, ext) { // check extension from client side
+                        if (!(ext && /^(txt|doc|docx|xls|pdf|jpg)$/i.test(ext))) {
+                            alert('Invalid File Format.');
+                            return false;
+                        }
+                        $('#UploadStatus').html('Uploading…'); /// set progress
+                    }
+                });
+            });
+            function DeleteFile(file) {
+                $('#UploadStatus').html('deleting…'); //set progress
+                $.ajax({
+                    url: 'UploadHandler1.ashx?file=' + file, // pass the file name to be deleted
+                    type: 'GET',
+                    cache: false,
+                    async: true,
+                    success: function (html) {
+                        $('#UploadedFile').html(""); // clear upload file div
+                        $('#UploadStatus').html("file has been deleted"); // show status
+                        $("#UploadButton").show(); // show upload button
+                    }
+                });
+            }
+    </script>
+</head>
+<body>
+    <!-- <form action="UploadHandler1.ashx" enctype="multipart/form-data" method="POST" onsubmit="startUpload(); ">
+    <input type="file" name="theUploadFile" />
+    <input type="submit" name="submit" value="Upload" />
+    </form>-->
+    <div>
+        <div id="UploadStatus">
+        </div>
+        <input type="button" id="UploadButton"  />
+        <div id="UploadedFile">
+        </div>
+    </div>
+    <!--<form >
+		  <input type="file" name="fileuplod" />
+		  <input type="submit" name="submit" value="Upload" onclick="startUpload()" />
+	</form>-->
+    <div id="progress-bar">
+    </div>
+</body>
+</html>

@@ -1,0 +1,438 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>userProfile</title>
+
+<link rel="shortcut icon" href="images/favicon.ico" type="image/png">
+<meta content="width=device-width; initial-scale=1; maximum-scale=1; user-scalable=0;" name="viewport">
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<link href="css/skeleton.css" rel="stylesheet" type="text/css">
+
+
+
+<script type="text/javascript" src=" http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+
+     <script type="text/javascript" src="jquery.Storage.js"></script>     
+	 <script type="text/javascript" src="jquery.jsonp-2.1.3.min.js"></script>
+<script>
+function asd() 
+{
+var asd= $.Storage.get("asd");
+
+alert(sessionStorage.getitem('value'));
+}
+</script>
+  
+
+<script>
+
+function GeneralInfo() {
+	
+$.ajax(
+{
+type: "POST",
+url: "http://2bvision.com/kids2promobile/ProfileBuilderService.asmx/GetGeneralProfileInformation",
+data: "{userName: '" + $.Storage.get("UserName") + "','viewingUser':'" + $.Storage.get("UserName")+"'}",
+contentType: "application/json; charset=utf-8",
+dataType: "json",
+
+success: function (response, status) {
+	//alert('1');
+ 	    $.Storage.get("UserName");
+		var asd =$("#divGenralInfo");
+		//alert(asd);
+//alert(response.d);
+		$("#divGenralInfo").html(response.d);	
+		
+$("#divUserName").html($.Storage.get("UserName")).append(" Profile");
+	},
+		failure: function (msg) {
+		alert(msg);
+		}
+	}
+	);
+}	
+</script>
+
+<script>
+
+function GetLanguageInfo() {
+	
+$.ajax(
+{
+type: "POST",
+url: "http://2bvision.com/kids2promobile/ProfileBuilderService.asmx/GetLanguageInfo",
+data: "{userName: '" + $.Storage.get("UserName") + "','viewingUser':'" + $.Storage.get("UserName")+"'}",
+contentType: "application/json; charset=utf-8",
+dataType: "json",
+
+success: function (response, status) {
+	//alert('1');
+ 	    $.Storage.get("UserName");
+		var asd =$("#divLanguageInfo");
+	//	alert(asd);
+//alert(response.d);
+		$("#divLanguageInfo").html(response.d);	
+		
+
+	},
+		failure: function (msg) {
+		alert(msg);
+		}
+	}
+	);
+}	
+</script>
+<script>
+
+function GetLeftColumn() {
+	
+$.ajax(
+{
+type: "POST",
+url: "http://2bvision.com/kids2promobile/ProfileBuilderService.asmx/GetLeftColumn",
+data: "{userName: '" + $.Storage.get("UserName") + "','viewingUser':'" + $.Storage.get("UserName")+"'}",
+contentType: "application/json; charset=utf-8",
+dataType: "json",
+
+success: function (response, status) {
+	
+ 	    $.Storage.get("UserName");
+		//var asd =$("#divLefColoumn");
+		//alert(response.d);		
+		$("#divLefColoumn").html(response.d);	
+		
+
+	},
+		failure: function (msg) {
+		alert(msg);
+		}
+	}
+	);
+}	
+</script>
+<script>
+
+function GetSocialMeta() {
+	
+$.ajax(
+{
+type: "POST",
+url: "http://2bvision.com/kids2promobile/ProfileBuilderService.asmx/GetSocialMeta",
+data: "{userName: '" + $.Storage.get("UserName") + "','viewingUser':'" + $.Storage.get("UserName")+"'}",
+contentType: "application/json; charset=utf-8",
+dataType: "json",
+
+success: function (response, status) {
+	//alert('1');
+ 	    $.Storage.get("UserName");
+		var asd =$("#divSocialMeta");
+		//alert(asd);
+
+		$("#divSocialMeta").html(response.d);	
+		
+
+	},
+		failure: function (msg) {
+		alert(msg);
+		}
+	}
+	);
+}	
+</script>
+<script>
+
+function GetRightAdver() {
+	
+$.ajax(
+{
+type: "POST",
+url: "http://2bvision.com/kids2promobile/AdvertisementManagerService.asmx/GetRightAdvertisingColumn",
+data: "{}",
+contentType: "application/json; charset=utf-8",
+dataType: "json",
+
+success: function (response, status) {
+	//alert('1');
+ 	    $.Storage.get("UserName");
+		var asd =$("#divRightAdds");
+		//alert(asd);
+
+		$("#divRightAdds").html(response.d);	
+		
+
+	},
+		failure: function (msg) {
+		alert(msg);
+		}
+	}
+	);
+}	
+</script>
+<script>
+
+function GetLeaderBoard() {
+	
+$.ajax(
+{
+type: "POST",
+url: "http://2bvision.com/kids2promobile/AdvertisementManagerService.asmx/GetLeaderBoard",
+data: "{}",
+contentType: "application/json; charset=utf-8",
+dataType: "json",
+
+success: function (response, status) {
+	//alert('1');
+ 	    $.Storage.get("UserName");
+		var asd =$("#divLeaderBoard");
+		//alert(asd);
+
+		$("#divLeaderBoard").html(response.d);	
+		
+
+	},
+		failure: function (msg) {
+		alert(msg);
+		}
+	}
+	);
+}	
+</script>
+
+<script>
+
+function GetNoOfFollowers() {
+	
+$.ajax(
+{
+type: "POST",
+url: "http://2bvision.com/kids2promobile/ProfileBuilderService.asmx/GetNumberOfFollowers",
+data: "{}",
+contentType: "application/json; charset=utf-8",
+dataType: "json",
+
+success: function (response, status) {
+	//alert('1');
+ 	   // $.Storage.get("UserName");
+	   var asd =$("#lblNoOfFollewrs");
+		//alert(asd);
+          var NoOfFollowers="Them Member has "+response.d+" Followers";
+		//  alert(NoOfFollowers);
+		$("#lblNoOfFollewrs").text(NoOfFollowers);	
+		           
+	},
+		failure: function (msg) {
+		alert(msg);
+		}
+	}
+	);
+}	
+</script>
+
+<script>
+function checklogin()
+{
+if($.Storage.get("UserName")!= null)
+{}
+else
+{
+	 window.location='file:///D:/Adnan/Phone%20Gap/mobile/login.html';  
+}
+	}
+</script>
+
+</head>
+
+<body onLoad="GeneralInfo(),GetLanguageInfo(),GetLeftColumn(),GetSocialMeta(),GetRightAdver(),GetLeaderBoard(), GetNoOfFollowers() ">
+<div>
+  <div id="wraper">
+      <header>
+          <nav>
+              <ul class="clearfix">
+                  <li>
+                      <a href="SportsDefinitions.html" target="_self" title="home" >Sports</a>
+                  </li>
+                  <li>
+                      <a href="#.html" title="mediakit" target="#">Articles</a>
+                  </li>
+                  <li>
+                      <a class="ui-link" href="#.html" title="faq" target="#">Teams</a>
+                  </li>
+                  <li>
+                      <a class="ui-link" href="#.html" title="feedback" target="#">Messages</a>
+                  </li>
+                  <li>
+                      <a class="ui-link" href="#.html" title="contactus" target="#">Fanclubs</a>
+                  </li>
+              </ul>
+          </nav>
+      </header>
+      </div>
+      <!-- header ends -->
+      <!-- container starts-->
+      <!-- inner menu starts-->
+      <div class="innermenu">
+        <ul class="clearfix">
+          <li>
+              <a href="/userprofile.html" title="home" target="_self">Home</a>
+          </li>
+          <li class="sep"></li>
+          <li>
+              <a href="../static/mediaKit.html" title="mediakit" target="_self">Profile</a>
+          </li>
+          <li class="sep"></li>
+          <li>
+              <a class="ui-link" href="#.html" title="faq" target="#">MessageBoard</a>
+          </li>
+        </ul>
+       </div>
+       	
+       <!-- inner menu ends-->
+       
+       <div id="divLeaderBoard">
+       </div>
+       </br>
+      <div class="contetns">
+      	<div id="userProfile">
+        	<div class="clearfix">
+        	<!--	<div class="profilePIc fLeft">
+                	<img src="images/186443_100001174488602_2094423526_n.jpg"  alt="Profile Picture">
+                </div>-->
+                <div id="divUserName" class="fLeft"></div>
+            </div>
+            <div id="divGenralInfo"   >
+            
+            </div>
+            </br>
+             <div id="divLanguageInfo" >
+            
+            </div>
+             </br>
+             <div>
+             <div style="float:left;" id="divLefColoumn"  >
+            
+            </div>
+            <div id="divRightAdds" style="float:left;" >
+            </div>
+            <div>
+            <br>
+              <div id="divSocialMeta" style="clear:both;" >
+            
+            </div>
+            </br>
+            
+            <!--<div class="userLinks">
+                <ul class="clearfix">
+                	<li class="headings">View User's Content</li>
+                	<li>
+                    	<img alt="Member's Profile on Kids2ProSports" src="images/iconInfo.png">
+                        <a href="UserProfile.aspx?Id=bas">Member's Main Profile</a>
+                    </li>
+                    <li>
+                    	<img alt="Member's Sports Profiles "  src="Images/iconSports.png">
+						<a href="UserSports.aspx?Id=bas">Sport Profiles</a>
+                    </li>
+                    <li>
+                    	<img alt="Kids 2 Pro Sports View Meber's Photos" onClick="asd()" src="Images/iconPhotos.png">
+						<a href="UserPhotos.aspx?Id=bas">Photos</a>
+                    </li>
+                    <li>
+                    	<img alt="Kids 2 Pro Sports View Member's Videos" src="Images/iconVideos.png">
+						<a href="UserVideos.aspx?Id=bas">Videos</a>
+                    </li>
+                    <li>
+                    	<img alt="Kids 2 Pro Sports View Member's Blog" src="Images/iconBlogs.png">
+						<a href="UserBlog.aspx?Id=bas">Blog</a>
+                    </li>
+                    <li>
+                    	<img alt="Kids 2 Pro Sports View Member's Articles" src="Images/iconArticles.png">
+						<a href="UserArticles.aspx?Id=bas">Articles</a>
+                    </li>
+                    <li>
+                    	<img alt="Kids 2 Pro Sports View Member's Teams" src="Images/iconTeams.png">
+						<a href="UserTeams.aspx?Id=bas">Teams</a>
+                    </li>
+                    <li>
+                    	<img alt="Kids 2 Pro Sports View Member's Contacts" src="Images/iconContacts.png">
+						<a href="UserContacts.aspx?Id=bas">Contacts</a>
+                    </li>
+                    <li>
+                    	<img alt="Kids 2 Pro Sports View Member's Fan Clubs" src="Images/iconFanClubs.png">
+						<a href="UserFanClubs.aspx?Id=bas">Fan Clubs</a>
+                    </li>
+                    <li>
+                    	<img alt="Kids 2 Pro Sports View Member's Education" src="Images/iconEducation.png">
+						<a href="UserEducation.aspx?Id=bas">Education</a>
+                    </li>
+                    <li>
+                    	<img alt="Kids 2 Pro Sports View Member's Awards" src="Images/iconAwards.png">
+						<a href="UserAwards.aspx?Id=bas">Awards</a>
+                    </li>
+                    <li>
+                    	<img alt="Kids 2 Pro Sports View Member's Events" src="Images/iconEvents.png">
+						<a href="UserEvents.aspx?Id=bas">Events</a>
+                    </li>
+                    <li>
+                    	<img alt="Kids 2 Pro Sports View Member's Highlights" src="Images/iconHighlights.png">
+						<a href="UserHighlights.aspx?Id=bas">Highlights</a>
+                    </li>
+                    <li>
+                    	<img alt="Kids 2 Pro Sports View Member's Testimonials" src="Images/iconTestimonials.png">
+						<a href="UserTestimonials.aspx?Id=bas">Testimonials</a>
+                    </li>
+                </ul>
+            </div>-->
+			<div class="shareIcons">
+              <h1>Share This</h1>
+              <a href="http://www.facebook.com/pages/Kids2ProSportscom/246679545408252" title="facebook" target="_self"><img alt="facebook" src="images/facebook.png"></a>
+              <a href="http://www.myspace.com/kids2prosports" title="myspace" target="_self"><img alt="myspace" src="images/myspace.png"></a>
+              <a href="http://sports.groups.yahoo.com/group/Kids2ProSports/" title="yahoo" target="#"><img alt="yahoo" src="images/yahoo.png"></a>
+              <a href="http://www.youtube.com/user/Kids2ProSports?ytsession=z-2bpR1F6KkzxpJXqUAuSu8npv_EAufzd8UxWG-wO5M7JJFFtEn4bzGiAjxyK77nRARXqOXvl0_lHPWLZSbjPLH5W6VE-Awt2DS2O0P13TfAJJIPjPnsPg2r0pvhvlcPvhJAC41cGiHg_FmPuR7MnwCoUVwPrdqonK2wykowr7AfvwqJbBaiQ4qoO7Z7M7ixFyTv2MB6OnHSs0Ztf6LbmUb8dI6xfiexczjVBMOjViU" title="youtube" target="_self"><img alt="youtube" src="images/youtube.png"></a>
+              <a href="http://www.reddit.com/r/sports/comments/pamgt/kids2prosports_expands_it_international_sports/?already_submitted=true" title="reddit" target="#"><img alt="reddit" src="images/reddit.png"></a>
+              <a href="http://www.linkedin.com/in/kids2prosports" title="linked" target="_self"><img alt="linkedin" src="images/linkedin.png"></a>
+           </div>
+           </br>
+           <div>
+           <label  style="font-family:Arial, Helvetica, sans-serif;font-size:12px" id="lblNoOfFollewrs" />
+           </div>
+              </br>
+        </div>
+      </div>
+      <!-- container ends-->
+      <!-- footer starts -->
+      <div id="footerWrap">
+          <footer>
+              <a href="userprofile.html" title="home" target="_self">Home</a>
+              <a href="static/Affiliates.html" title="Affiliates" target="_self">Affiliates</a>
+              <a href= "static/CollegiateRecruiting.html"title="Collegiate Recruiting" target="_self">Collegiate Recruiting</a>
+              <a href="#.html" title="Philanthropy" target="#">Philanthropy</a>
+              <a href="#.html" title="Disability Sports" target="#">Disability Sports</a>
+              <a href="static/Education.html" title="Education & Sports" target="_self">Education & Sports</a>
+              <a href= "static/K2psZOO.html"title="K2psZOO" target="_self">K2psZOO</a>
+              <a href= "static/NewsAndEvents..html"title="News & Events" target="_self">News & Events</a>
+              <a href="#.html" title="Sports Health & Fitness" target="_self">Sports Health & Fitness</a>
+              <a href="static/SportsICandy.html" title="SportsiCandy" target="_self"><i>SportsiCandy</i></a>
+              <a href="static/TechServices.html" title="Tech & Business Services" target="_self">Tech & Business Services</a>
+              <a href= "static/Write4Kids2ProSports.html"title="Write4K2PS" target="_self">Write4K2PS</a>
+              <a href="static/Future Features.html" title="Future Features" target="_self">Future Features</a>
+          </footer>
+          <div class="dots clear"></div>
+          <!-- Social Icon -->
+          <div class="clearfix">
+              <div class="copyright">&copy; Copyright 2011<br>Kids2prosports.com</div>
+              <div class="socialIcons">
+                 <a href="http://www.facebook.com/pages/Kids2ProSportscom/246679545408252" title="facebook" target="_self"><img alt="facebook" src="images/facebook.png"></a>
+              <a href="http://www.myspace.com/kids2prosports" title="myspace" target="_self"><img alt="myspace" src="images/myspace.png"></a>
+              <a href="http://sports.groups.yahoo.com/group/Kids2ProSports/" title="yahoo" target="#"><img alt="yahoo" src="images/yahoo.png"></a>
+              <a href="http://www.youtube.com/user/Kids2ProSports?ytsession=z-2bpR1F6KkzxpJXqUAuSu8npv_EAufzd8UxWG-wO5M7JJFFtEn4bzGiAjxyK77nRARXqOXvl0_lHPWLZSbjPLH5W6VE-Awt2DS2O0P13TfAJJIPjPnsPg2r0pvhvlcPvhJAC41cGiHg_FmPuR7MnwCoUVwPrdqonK2wykowr7AfvwqJbBaiQ4qoO7Z7M7ixFyTv2MB6OnHSs0Ztf6LbmUb8dI6xfiexczjVBMOjViU" title="youtube" target="_self"><img alt="youtube" src="images/youtube.png"></a>
+              <a href="http://www.reddit.com/r/sports/comments/pamgt/kids2prosports_expands_it_international_sports/?already_submitted=true" title="reddit" target="#"><img alt="reddit" src="images/reddit.png"></a>
+              <a href="http://www.linkedin.com/in/kids2prosports" title="linked" target="_self"><img alt="linkedin" src="images/linkedin.png"></a>
+              </div>
+          </div>
+          <!-- Social Icon -->
+      </div>
+       <!-- footer ends -->
+  </div>
+</body>
+</html>

@@ -1,0 +1,130 @@
+ <html>
+<head runat="server">
+    <title>Sys.Net Demo</title>
+    
+    <script type="text/javascript">
+       function GetServerTime()
+       {
+           var webServicePath = 'http://cruiselegend.com/cltestsite/WebService.asmx';
+            var webMethod='HelloWorld';
+            Sys.Net.WebServiceProxy.invoke(webServicePath, 
+            webMethod, false,{}, OnSucceeded, 
+            OnFailed,"User Context",1000000);
+
+        }
+
+        function OnSucceeded(result, eventArgs)
+        {   
+            var RsltElem = document.getElementById("lblTime");
+            RsltElem.innerHTML = result;
+        }
+
+        // if the Web service failed.
+        function OnFailed(error)
+        {
+            // Display the error.    
+            var RsltElem = document.getElementById("lblTime");
+            RsltElem.innerHTML = "Service Error: " + error.get_message();
+        }
+    
+    </script>
+    <script language="javascript">
+		var intCallId = 0
+//-------------------------------------------------------------------------------------------------------
+// Init is used to indentify the webservices
+//-------------------------------------------------------------------------------------------------------	
+		function Init()
+		{
+		//useService is used to identify the FactorialService webservice
+		 Service.useService("WebServices/FactorialService.asmx?WSDL","FactorialService");
+		//Function is used to call the QuoteService webservice at regular intervals
+		 GetNewQuote();
+		 setInterval( "GetNewQuote()", 5000 ) 
+		}
+//-------------------------------------------------------------------------------------------------------
+// GetNewQuote is used to indentify the webservices and call webmethods at the same time
+//-------------------------------------------------------------------------------------------------------	
+		function GetNewQuote()
+		{
+		  //useService is used to identify the QuoteService webservice
+		  Service.useService("WebServices/QuoteService.asmx?WSDL","QuoteService");
+		  
+		  // callService method is used to invoke methods and QuoteService_Result is the  callback event handler
+		  
+		  intCallID = Service.QuoteService.callService( QuoteService_Result, "GetQuote" );
+		}
+//-------------------------------------------------------------------------------------------------------
+// QuoteService_Result is the  callback event handler for the QuoteService
+//-------------------------------------------------------------------------------------------------------	
+		function QuoteService_Result(result)
+		{
+		  if (result.error) 
+		  {
+		  divQuote.innerText = result.errorDetail.string;
+		  }
+		  else
+		  {
+		  divQuote.innerText = result.value;
+		  }
+		}
+
+//-------------------------------------------------------------------------------------------------------
+// Service_Result is the default event handler when no callback event handler is supplied
+//-------------------------------------------------------------------------------------------------------		
+		function Service_Result()
+		{
+		  if ( event.result.error )
+		  {
+			lblFactorial.innerText = event.result.errorDetail.string;
+		  } 
+		  else
+		  {
+		  lblFactorial.innerText = "The factorial of " + txtFactorial.value + " is " + event.result.value; 
+		  }
+		}
+//-------------------------------------------------------------------------------------------------------
+// callService method is used to invoke methods and no callback event handler is supplied
+//-------------------------------------------------------------------------------------------------------	
+		function NormalButton_Click()
+		{
+		  intCallID = Service.FactorialService.callService( "Factorial", txtFactorial.value );
+		}
+//-------------------------------------------------------------------------------------------------------
+// Factorial_Result is the  callback event handler for the FactorialService
+//-------------------------------------------------------------------------------------------------------	
+		function Factorial_Result( result )
+		{
+			if ( result.error )
+			  {
+				lblFactorial.innerText = result.errorDetail.string;
+			  } 
+			  else
+			  {
+			    lblFactorial.innerText = "The factorial of " + txtFactorial.value + " is " + result.value;
+			  }
+		
+		}
+//-------------------------------------------------------------------------------------------------------
+// callService method is used to invoke methods and Factorial_Result is the  callback event handler
+//-------------------------------------------------------------------------------------------------------
+		function CallBackButton_Click()
+		{
+		  intCallID = Service.FactorialService.callService( Factorial_Result, "Factorial", txtFactorial.value );
+		}
+		</script>
+    
+</head>
+<body>
+    <form id="form1" runat="server">
+    
+ 
+    <div>
+   
+    <input type="button" onClick="GetServerTime();" value="GetTime" />
+    
+    <asp:Label ID="lblTime" runat="server" BackColor="Cornsilk"></asp:Label>
+    
+    </div>
+    </form>
+</body>
+ </html>

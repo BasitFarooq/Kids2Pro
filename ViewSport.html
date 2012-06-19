@@ -1,0 +1,320 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>ViewSport</title>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/png" />
+    <meta content="width=device-width; initial-scale=1; maximum-scale=1; user-scalable=0;"
+        name="viewport" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" type="image/ico" href="http://www.datatables.net/media/images/favicon.ico" />
+    <link href="media/css/demo_table.css" rel="stylesheet" type="text/css" />
+    <link href="media/css/demo_page.css" rel="stylesheet" type="text/css" />
+    <script src="js/jquery-1.4.2.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="js/jquery.Storage.js"></script>
+    <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+    <style type="text/css">
+        .dataTables_filter
+        {
+            display: none;
+        }
+    </style>
+    <script type="text/javascript">
+
+            $(document).ready(function () {
+            var online = navigator.onLine;    // Detecting the internet connection
+            if (online) {
+                // do your stuff
+            } else {
+                alert('You\'re Offline now...');
+                return false;
+            }
+        });
+function renderTable(result) {
+                var dtData = [];
+                $.each(result, function () {
+                    dtData.push([
+                           this.UserName,
+                           this.DateTime,
+						   this.Text,
+						   this.ArticleID,
+				           this.Title
+						   
+                        ]);
+                });
+ 					$('#Articleblog').dataTable(
+					{
+						  'aaData': dtData,
+						 /* "bPaginate": false,
+						  "bLengthChange": false,
+						  "bFilter": true,
+						  "bSort": false,
+						  "bInfo": false,
+						  "bAutoWidth": true*/ 
+						}
+);
+}
+
+    </script>
+    <script type="text/javascript">
+        function GetKeywordArticles() {
+            queryString = getUrlVars()["SportName"]; queryString = queryString.replace("%20", " ");
+
+            var dataBlog = { "SportName": queryString };
+            $.ajax({
+                url: 'http://2bvision.com/kids2promobile/ViewSport.asmx/GetKeywordArticles',
+                type: 'POST',
+                data: JSON.stringify(dataBlog),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    //				
+                    renderTable(response.d);
+                },
+                failure: function (errMsg) {
+                    $('#errorMessage').text(errMsg); //errorMessage is id of the div
+                }
+            });
+
+        }
+    </script>
+    <script type="text/javascript">
+
+        function getUrlVars() {
+            var vars = [], hash;
+            var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+            for (var i = 0; i < hashes.length; i++) {
+                hash = hashes[i].split('=');
+                vars.push(hash[0]);
+                vars[hash[0]] = hash[1];
+            }
+            return vars;
+        }
+
+        queryString = getUrlVars()["SportName"]; queryString = queryString.replace("%20", " ");
+        var data = { "MajorSport": queryString };
+        var items = [];
+        $.ajax(
+			{
+			    type: "POST",
+			    url: "http://2bvision.com/kids2promobile/ViewSport.asmx/GetSubSportsInSports",
+			    data: JSON.stringify(data),
+			    contentType: "application/json; charset=utf-8",
+			    dataType: "json",
+
+			    success: function (response, status) {
+			        $("#LiteralSportHierarchy").val(queryString);
+			        $("#LiteralSportDefinition").val(queryString + " Definition Goes Here ")
+
+			        var Sports = {};
+			        Sports = response.d;
+			        for (i = 0; i < Sports.length; i++) {
+			            $('#ListSubSports').append('<li><a style="color:Black" href="ViewsubSport.html?SportName=' + Sports[i].Name + '">' + Sports[i].Name + '</a></li>');
+
+			        }
+
+			    },
+			    failure: function (msg) {
+			        alert(msg);
+			    }
+			});
+
+        function GetLeaderBoard() {
+
+            $.ajax(
+	{
+	    type: "POST",
+	    url: "http://2bvision.com/kids2promobile/AdvertisementManagerService.asmx/GetLeaderBoard",
+	    data: "{}",
+	    contentType: "application/json; charset=utf-8",
+	    dataType: "json",
+
+	    success: function (response, status) {
+	        $("#divLeaderBoard").html(response.d);
+	    },
+	    failure: function (msg) {
+	        alert(msg);
+	    }
+	}
+	);
+        }
+
+        function GetRightAdver() {
+
+            $.ajax(
+{
+    type: "POST",
+    url: "http://2bvision.com/kids2promobile/AdvertisementManagerService.asmx/GetRightAdvertisingColumn",
+    data: "{}",
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+
+    success: function (response, status) {
+        $.Storage.get("UserName");
+        var asd = $("#divRightAdds");
+        $("#divRightAdds").html(response.d);
+    },
+    failure: function (msg) {
+        alert(msg);
+    }
+}
+	);
+        }	
+
+    </script>
+    <script type="text/javascript">
+    function ViewArticleGrid()
+	{
+		<!--$('#TableArticle').show();-->
+		 GetKeywordArticles();
+		
+    }
+    
+    </script>
+</head>
+<body onload="GetLeaderBoard(),GetRightAdver()">
+    <div id="wraper" class="">
+        <header>
+          <nav>
+              <ul class="clearfix">
+                  <li>
+                      <a href="SportsDefinitions.html" target="_self" title="Sports" >Sports</a>
+                  </li>
+                  <li>
+                      <a href="createArticle.html" title="Articles" target="_self">Articles</a>
+                  </li>
+                  <li>
+                      <a class="ui-link" href="CreateTeam.html" title="Teams" target="_self">Teams</a>
+                  </li>
+                  
+                  <li>
+                      <a class="ui-link" href="CreateFanClub.html" title="Fanclubs" target="_self">Fanclubs</a>
+                  </li>
+              </ul>
+          </nav>
+      </header>
+        <!-- header ends -->
+        <!-- container starts-->
+        <div class="contetns clearfix">
+            <!-- left area starts-->
+            <div class="contentLeft fLeft">
+                <div class="innerwrapper">
+                    <div id="divLeaderBoard">
+                    </div>
+                    <!-- contentLeft -->
+                    <label id="LiteralSportHierarchy">
+                    </label>
+                    <label id="LiteralSportDefinition">
+                    </label>
+                    <nav>  
+ 			     <ul id="ListSubSports" class="clearfix">
+                
+                  </ul> 
+                  </nav>
+                    <br />
+                    <div id="errormessage">
+                    </div>
+                    <br />
+                    <!--end ownLine-->
+                </div>
+                <input type="button" id="buttonViewArticles" onclick="ViewArticleGrid()" value="View Related Articles" />
+                <br />
+                <div class="clearfix">
+                </div>
+                <div id="TableArticle">
+                    <table id="Articleblog" class="dataTables_filter">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Title
+                                </th>
+                                <th>
+                                    UserName
+                                </th>
+                                <th>
+                                    DateTime
+                                </th>
+                                <th>
+                                    Text
+                                </th>
+                                <th>
+                                    ArticleID
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <div id="errorMessage">
+                    </div>
+                    </br>
+                    <div id="ViewFullArticle">
+                    </div>
+                    <br />
+                </div>
+            </div>
+            <!-- advertisement area starts-->
+            <div class="contentRight fRight">
+                </div>
+            <!-- advertisement area ends-->
+        </div>
+        <div class="shareIcons">
+            <h1>
+                Share This</h1>
+            <a href="http://www.facebook.com/pages/Kids2ProSportscom/246679545408252" title="facebook"
+                target="_self">
+                <img alt="facebook" src="images/facebook.png"></a> <a href="http://www.myspace.com/kids2prosports"
+                    title="myspace" target="_self">
+                    <img alt="myspace" src="images/myspace.png"></a> <a href="http://sports.groups.yahoo.com/group/Kids2ProSports/"
+                        title="yahoo" target="#">
+                        <img alt="yahoo" src="images/yahoo.png"></a> <a href="http://www.youtube.com/user/Kids2ProSports?ytsession=z-2bpR1F6KkzxpJXqUAuSu8npv_EAufzd8UxWG-wO5M7JJFFtEn4bzGiAjxyK77nRARXqOXvl0_lHPWLZSbjPLH5W6VE-Awt2DS2O0P13TfAJJIPjPnsPg2r0pvhvlcPvhJAC41cGiHg_FmPuR7MnwCoUVwPrdqonK2wykowr7AfvwqJbBaiQ4qoO7Z7M7ixFyTv2MB6OnHSs0Ztf6LbmUb8dI6xfiexczjVBMOjViU"
+                            title="youtube" target="_self">
+                            <img alt="youtube" src="images/youtube.png"></a> <a href="http://www.reddit.com/r/sports/comments/pamgt/kids2prosports_expands_it_international_sports/?already_submitted=true"
+                                title="reddit" target="#">
+                                <img alt="reddit" src="images/reddit.png"></a> <a href="http://www.linkedin.com/in/kids2prosports"
+                                    title="linked" target="_self">
+                                    <img alt="linkedin" src="images/linkedin.png"></a>
+        </div>
+        <!-- container ends-->
+        <!-- footer starts -->
+        <div id="footerWrap">
+            <footer>
+              <a href="index.html" title="home" target="_self">Home</a>
+              <a href="static/Affiliates.html" title="Affiliates" target="_self">Affiliates</a>
+              <a href= "static/CollegiateRecruiting.html"title="Collegiate Recruiting" target="_self">Collegiate Recruiting</a>
+           <!--   <a href="#.html" title="Philanthropy" target="#">Philanthropy</a>
+              <a href="#.html" title="Disability Sports" target="#">Disability Sports</a>-->
+              <a href="static/Education.html" title="Education & Sports" target="_self">Education & Sports</a>
+              <a href= "static/K2psZOO.html"title="K2psZOO" target="_self">K2psZOO</a>
+              <a href= "static/NewsAndEvents.html"title="News & Events" target="_self">News & Events</a>
+           <!--   <a href="#.html" title="Sports Health & Fitness" target="_self">Sports Health & Fitness</a>-->
+              <a href="static/SportsICandy.html" title="SportsiCandy" target="_self"><i>SportsiCandy</i></a>
+              <a href="static/TechServices.html" title="Tech & Business Services" target="_self">Tech & Business Services</a>
+              <a href= "static/Write4Kids2ProSports.html"title="Write4K2PS" target="_self">Write4K2PS</a>
+              <a href="static/FutureFeatures.html" title="Future Features" target="_self">Future Features</a>
+          </footer>
+            <div class="dots clear">
+            </div>
+            <!-- Social Icon -->
+            <div class="clearfix">
+                <div class="copyright">
+                    &copy; Copyright 2011 Kids2prosports.com</div>
+                <div class="socialIcons">
+                    <a href="http://www.facebook.com/pages/Kids2ProSportscom/246679545408252" title="facebook"
+                        target="_self">
+                        <img alt="facebook" src="images/facebook.png"></a> <a href="http://www.myspace.com/kids2prosports"
+                            title="myspace" target="_self">
+                            <img alt="myspace" src="images/myspace.png"></a> <a href="http://sports.groups.yahoo.com/group/Kids2ProSports/"
+                                title="yahoo" target="_self">
+                                <img alt="yahoo" src="images/yahoo.png"></a> <a href="http://www.youtube.com/user/Kids2ProSports?ytsession=z-2bpR1F6KkzxpJXqUAuSu8npv_EAufzd8UxWG-wO5M7JJFFtEn4bzGiAjxyK77nRARXqOXvl0_lHPWLZSbjPLH5W6VE-Awt2DS2O0P13TfAJJIPjPnsPg2r0pvhvlcPvhJAC41cGiHg_FmPuR7MnwCoUVwPrdqonK2wykowr7AfvwqJbBaiQ4qoO7Z7M7ixFyTv2MB6OnHSs0Ztf6LbmUb8dI6xfiexczjVBMOjViU"
+                                    title="youtube" target="_self">
+                                    <img alt="youtube" src="images/youtube.png"></a> <a href="http://www.reddit.com/r/sports/comments/pamgt/kids2prosports_expands_it_international_sports/?already_submitted=true"
+                                        title="reddit" target="_self">
+                                        <img alt="reddit" src="images/reddit.png"></a> <a href="http://www.linkedin.com/in/kids2prosports"
+                                            title="linked" target="_self">
+                                            <img alt="linkedin" src="images/linkedin.png"></a>
+                </div>
+            </div>
+            <!-- Social Icon -->
+        </div>
+        <!-- footer ends -->
+    </div>
+</body>
+</html>

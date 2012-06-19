@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Calling Classic Web Services with jQuery</title>
+    </head> 
+    <bod>
+<table>
+    <tbody>
+        <tr>
+            <th>
+                Value 1:
+            </th>
+            <td>
+                <asp:TextBox ID="txtValue1" runat="server" />
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Value 2:
+            </th>
+            <td>
+                <asp:TextBox ID="txtValue2" runat="server" />
+            </td>
+        </tr>
+    </tbody>
+</table>
+ 
+<asp:Button ID="btnGo" Text="Go" OnClientClick="CallService(); return false;" runat="server" />
+ 
+<asp:Label ID="lblResult" Text="&nbsp;" Width="100%" runat="server" />
+<body/>
+</html>

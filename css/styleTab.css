@@ -1,0 +1,121 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* generic classes begins */
+
+* { margin:0; padding:0; border:0 none; }
+body { margin:0; font-size:12px; font-family:Arial, Helvetica, sans-serif; }
+
+table, td { border-collapse:collapse; }
+ul, li { list-style-type:none; }
+a, a:visited {  text-decoration:none; }
+a:hover {  text-decoration:underline; }
+/* ------- end --------- */
+
+/* clearing floats */
+.clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+.clearfix { display: inline-block }
+.clearfix { display:block }
+* html .clearfix { height: 1px; }
+.clear { clear: both; }
+/*-----------------*/
+
+/* headings */
+h1 { font-weight:normal; font-size:20px; padding:0 0 10px 0; color:#0181c4; }
+h2 { font-weight:normal; font-size:18px; padding:0 0 10px 0; color:#00304a; }
+h3 { font-size:14px; margin:5px 0; color:#00aaff; }
+h4 { font-size:14px; margin:10px 0 5px 0; color:#000000; }
+.subHeading { background:url(../images/sub-head-bg.gif) repeat-x left top; height:39px; line-height:30px; padding:0 8px; color:#00263a; font-size:18px; }
+/* ------- end --------- */
+
+/* containers */
+#wraper {  min-width:1000px; }
+#contents { clear:both; margin-top:20px; border:1px solid #ccc; padding:15px; }
+#header { height:120px; }
+/* ------- end --------- */
+
+p.para { padding:5px 0 15px 0; font-size:12px; line-height:18px; }
+.fLeft { float:left; }
+.fRight { float:right; }
+#logo { height:80px; min-width:300px; width:32%; padding:20px 0 0 5px; float:left; }
+#logo img { border:1px solid #ccc; padding:1px; }
+
+/* top nav */
+#topLinks { margin:25px 5px 0 0; width:50%; color:#666; font-size:12px; line-height:15px; }
+/* ------- end --------- */
+
+/* paging */
+.paging { width:200px; margin:10px auto 0 auto;}
+.paging ul {}
+.paging ul li { float:left; margin-right:2px; color:#666666; font-weight:bold; }
+.paging ul li span{ margin-right:2px; color:#000000;  font-weight:bold; }
+.paging ul li a, .paging ul li a:visited { float:left; color:#00aaff; text-decoration:none; }
+
+.paging ul li.first a, .paging ul li.first a:visited, .paging ul li.first a:hover { float:left; color:#00aaff; text-decoration:none; width:19px; height:20px; display:block; background:url(../images/first.png) no-repeat left top; }
+.paging ul li.previous a, .paging ul li.previous a:visited, .paging ul li.previous a:hover { float:left; color:#00aaff; text-decoration:none; width:14px; height:20px; display:block; background:url(../images/previous.png) no-repeat left top; }
+
+.paging ul li.last a, .paging ul li.last a:visited, .paging ul li.last a:hover { float:left; color:#00aaff; text-decoration:none; width:19px; height:20px; display:block; background:url(../images/last.png) no-repeat left top; }
+.paging ul li.next a, .paging ul li.next a:visited, .paging ul li.next a:hover { float:left; color:#00aaff; text-decoration:none; width:14px; height:20px; display:block; background:url(../images/next.png) no-repeat left top; }
+/* ------- end --------- */
+
+
+/****************** top search ******************/
+.topSearch{width:350px; height:auto; margin:-4px 0 0 0; position:relative; z-index:999;}
+.searchInput{float:left; width:292px; height:21px; margin:0px; font-weight:normal; color:#666666; padding:5px 8px; line-height:21px; background:url(../images/searchBG.png) 0px 0px no-repeat;}
+.searchInput:focus{background:url(../images/searchBG.png) 0px -41px no-repeat;}
+.topSearch a{float:right; margin:0px; width:41px; height:31px; background:url(../images/searchBG.png) -308px 0px no-repeat; text-indent:-9999px;}
+.topSearch a:hover{background:url(../images/searchBG.png) -308px -81px no-repeat;}
+/* ------- end --------- */
+/* tabs */
+div.domtab { margin:20px 0 0 0; }
+ul.domtabs {float:left; width:50%;	}
+ul.domtabs li {	float:left;	padding:0; margin:0 5px 0 0; display:block; color:#333333; height:30px; line-height:30px; text-align:center;  }
+ul.domtabs a:link, ul.domtabs a:visited, ul.domtabs a:active, ul.domtabs a:hover { display:block; color:#777777; height:26px; line-height:26px; text-align:center; font-weight:bold; padding:0 15px; text-decoration:none; border-left:1px solid #999; border-top:1px solid #999; border-right:1px solid #999;  background:#eee url(../images/tab-bg.jpg) repeat-x left top; }
+ul.domtabs a:hover{ background:#eee url(../images/tab-bg.jpg) repeat-x left top; color:#444444; }
+div.domtab div.hideIt { clear:both; width:36%; padding:15px 0; background:#f6f6f6; }
+ul.domtabs li.active a:link, ul.domtabs li.active a:visited, ul.domtabs li.active a:active, ul.domtabs li.active a:hover { background:#f6f6f6; height:29px; line-height:26px; color:#000000; border-left:1px solid #dddddd; border-top:1px solid #dddddd; border-right:1px solid #dddddd; background:url(../images/tab-bg-hover.jpg) repeat-x left top; }
+#domtabprintview{ float:right; padding-right:1em; text-align:right; }
+#domtabprintview a:link, #dom
+
+
+/* breadcrumb */
+.breadcrumb { background:url(../images/breadcrumb-bg.gif) repeat-x left bottom; height:20px; line-height:20px; margin-left:6px; }
+.breadcrumb ul { }
+.breadcrumb ul li { float:left; color:#999999; font-size:11px; margin:0 0 0 2px; }
+.breadcrumb ul li a, .breadcrumb ul li a:visited { float:left; color:#666666; text-decoration:none; margin-right:2px; }
+.breadcrumb ul li a:hover { color:#999999; text-decoration:none; }
+.breadcrumb ul li.current a, .breadcrumb ul li.current a:visited { float:left; color:#00aaff; text-decoration:none; margin-right:2px; }
+.breadcrumb ul li.current a:hover { color:#00ccff; text-decoration:none; margin-right:2px; }
+/* ------- end --------- */
+
+.dynamicDataWraper { margin:8px; }
+td.hSpace { width:10px; font-size:0; }
+
+/* data grid and tables  */
+table.gridData { border-collapse:collapse; border:0; width:100%; border:1px solid #dddddd; }
+table.gridData td { border-collapse:collapse; line-height:14px; padding:4px 5px; font-size:11px; border-right:1px solid #dddddd; }
+table.gridData th { border-collapse:collapse; line-height:14px; padding:4px 5px; font-size:11px; border-right:1px solid #dddddd; border-bottom:2px solid #dddddd; }
+table.gridData tr.even { background:#f0f0f0; border-top:1px solid #dddddd;}
+.data { padding:5px 8px; }
+.edit {}
+.edit a{ color:#ffffff; margin:0 auto; text-decoration:none; display:block; background:url(../images/edit-icon.gif) no-repeat left top; width:16px; height:16px; }
+.delete {}
+.delete a{ color:#ffffff;  margin:0 auto; text-decoration:none; display:block; background:url(../images/delete-icon.gif) no-repeat left top; width:16px; height:16px; }
+/* ------- end --------- */
+
+/* footer */
+
+#footerWrap {  }
+.footer { float:left; width:650px; }
+.footer ul { }
+.footer ul li { float:left; height:30px; line-height:30px; font-size:11px; font-weight:bold; margin:0 5px; }
+.footer ul li.sep { float:left; width:1px; height:30px; line-height:30px; background:url(../images/sep.gif) no-repeat left center; }
+.footer ul li a, .footer ul li a:visited { float:left; color:#000000; text-decoration:none; }
+.footer ul li a:hover { color:#00aaff; text-decoration:none; }
+.footerBg { background:#ffffff url(../images/footer-bg.gif) repeat-x left bottom; }
+.copyright { float:right; width:340px; color:#666666; height:30px; line-height:30px; font-size:11px; font-weight:bold;  }
+.prevnext { display:none; }
+/* ------- end --------- */
+
+tabprintview a:visited, #domtabprintview a:active, #domtabprintview a:hover{ color:#fff; }
+/* ------- end --------- */

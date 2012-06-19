@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Behavior</title>
+    <script language="javascript">
+        var intCallId = 0
+        //-------------------------------------------------------------------------------------------------------
+        // Init is used to indentify the webservices
+        //-------------------------------------------------------------------------------------------------------	
+        function Init() {
+            //useService is used to identify the FactorialService webservice
+            Service.useService("http://cruiselegend.com/cltestsite/WebService.asmx?WSDL", "WebService");
+            //Function is used to call the QuoteService webservice at regular intervals
+           // GetNewQuote();
+           // setInterval("GetNewQuote()", 5000)
+        }
+        //-------------------------------------------------------------------------------------------------------
+        // GetNewQuote is used to indentify the webservices and call webmethods at the same time
+        //-------------------------------------------------------------------------------------------------------	
+        function GetNewQuote() {
+            //useService is used to identify the QuoteService webservice
+            Service.useService("WebServices/QuoteService.asmx?WSDL", "QuoteService");
+
+            // callService method is used to invoke methods and QuoteService_Result is the  callback event handler
+
+            intCallID = Service.QuoteService.callService(QuoteService_Result, "GetQuote");
+        }
+        //-------------------------------------------------------------------------------------------------------
+        // QuoteService_Result is the  callback event handler for the QuoteService
+        //-------------------------------------------------------------------------------------------------------	
+        function QuoteService_Result(result) {
+            if (result.error) {
+                divQuote.innerText = result.errorDetail.string;
+            }
+            else {
+                divQuote.innerText = result.value;
+            }
+        }
+
+        //-------------------------------------------------------------------------------------------------------
+        // Service_Result is the default event handler when no callback event handler is supplied
+        //-------------------------------------------------------------------------------------------------------		
+        function Service_Result() {
+            if (event.result.error) {
+                lblFactorial.innerText = event.result.errorDetail.string;
+            }
+            else {
+                lblFactorial.innerText = "The factorial of " + txtFactorial.value + " is " + event.result.value;
+            }
+        }
+        function Result() {
+            if (event.result.error) {
+                lblFactorial.innerText = event.result.errorDetail.string;
+            }
+            else {
+                lblFactorial.innerText = "The factorial of " + txtFactorial.value + " is " + event.result.value;
+            }
+        }
+        //-------------------------------------------------------------------------------------------------------
+        // callService method is used to invoke methods and no callback event handler is supplied
+        //-------------------------------------------------------------------------------------------------------	
+        function NormalButton_Click() {
+            intCallID = Service.FactorialService.callService("Factorial", txtFactorial.value);
+        }
+        function GetTime_Click() {
+
+            intCallID = Service.WebService.callService("c");
+        }
+        //-------------------------------------------------------------------------------------------------------
+        // Factorial_Result is the  callback event handler for the FactorialService
+        //-------------------------------------------------------------------------------------------------------	
+        function Factorial_Result(result) {
+            if (result.error) {
+                lblFactorial.innerText = result.errorDetail.string;
+            }
+            else {
+                lblFactorial.innerText = "The factorial of " + txtFactorial.value + " is " + result.value;
+            }
+
+        }
+        //-------------------------------------------------------------------------------------------------------
+        // callService method is used to invoke methods and Factorial_Result is the  callback event handler
+        //-------------------------------------------------------------------------------------------------------
+        function CallBackButton_Click() {
+            intCallID = Service.FactorialService.callService(Factorial_Result, "Factorial", txtFactorial.value);
+        }
+    </script>
+    <link href="CSS/Site.css" type="text/css" rel="stylesheet">
+</head>
+<body bgcolor="#ffffff" text="#000000" link="#0000cc" vlink="#0000cc" alink="#ff0000"
+    leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onload="Init()">
+    <div id="Service" style="behavior: url(webservice.htc)" onresult="Result()">
+    </div>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td valign="top">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="77%">
+                            <img src="Images/search-top.jpg" width="777" height="120">
+                        </td>
+                        <td width="23%" valign="bottom">
+                            <img src="Images/search--word.jpg" width="205" height="35">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="1" colspan="2" bgcolor="ECDFBC">
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <table cellspacing="0" cellpadding="0" width="50%" align="center">
+        <tr>
+            <td>&nbsp;
+                
+            </td>
+            <td>&nbsp;
+                
+            </td>
+        </tr>
+        <tr>
+            <td align="middle" colspan="2" class="SearchStatus">
+                <div id="divQuote">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;
+                
+            </td>
+            <td>&nbsp;
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Number
+            </td>
+            <td>
+                <input id="txtFactorial" type="text" name="txtFactorial" class="Textbox">
+                <input id="btnFactorial" type="button" value="Cal. Normal" name="btnFactorial" onclick="NormalButton_Click()"
+                    class="Button">
+                <input id="btnFactorial12" type="button" value="Cal. Callback" name="btnFactorial1"
+                    onclick="GetTime_Click()" class="Button">
+            </td>
+        </tr>
+        <tr>
+            <td align="middle" colspan="2">&nbsp;
+                
+            </td>
+        </tr>
+        <tr>
+            <td align="middle" colspan="2" style="text-align:center;font-family:Verdana, Geneva, sans-serif;color:#000000;">
+                <span id="lblFactorial"></span>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

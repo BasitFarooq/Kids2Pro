@@ -1,0 +1,342 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>AdvancedSearch</title>
+    <meta charset="utf-8" />
+    <title>SportsDefinitions</title>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/png" />
+    <meta content="width=device-width; initial-scale=1; maximum-scale=1; user-scalable=0;"
+        name="viewport" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" type="image/ico" href="http://www.datatables.net/media/images/favicon.ico" />
+    <script src="js/jquery-1.4.2.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="js/jquery.Storage.js"></script>
+    <script type="text/javascript" src="js/jquery.jsonp-2.1.3.min.js"></script>
+    <script src="js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script language="javascript" type="text/javascript">
+
+        $(document).ready(function () {
+var online = navigator.onLine;    // Detecting the internet connection
+         if (online) {
+             // do your stuff
+         } else {
+             alert('You\'re Offline now...');
+             return false;
+         }
+         }
+$(function(){
+$("#ListPrefix").change(function(){
+GetUserSearch();
+	
+			});
+		}); 
+			
+			});
+function renderTable(result) {
+                var dtData = [];
+                $.each(result, function () {
+                    dtData.push([
+                        "<h2>"+this.FirstName+this.LastName+ "</h2>",
+						 "<img alt='ProfileImage' height='100' width='100' src="+this.Picture+" />",
+						 "<p><span>City:</span> "+this.City+"</p>",
+                         "<p><span>State:</span>"+this.State+"</p>",
+                         "<p><span>Country:</span>"+this.Country+"</p>",  
+                         "<p><span>Primary Language:</span>"+this.Language+"</p>",
+						 "<a href=UserProfile.html?Id="+this.UserName+">View Member Profile</a>", 
+						 "<a href=ContactConfirmed.html?Id="+this.UserName+">Add Member to Contacts</a>",
+						 "<a href=Invite.html?Type=Team&uti="+this.UserName+">Invite Member to Join a Team</a>", 
+						 "<a href=Invite.html?Type=Team&uti="+this.UserName+">Invite Member to Join a Fan Club</a>",
+						 "<a href=CreateFanClub.html?about="+this.UserName+">Create Fan Club About Member</a>"
+
+                        ]);
+					});
+
+		  $('#SearchResult').dataTable({ //SearchResult is the id of the table
+			  'aaData': dtData,
+			  'bDestroy':true
+		 });
+		 
+	
+	  }
+	  
+/// GetUserSearch() ///			
+function GetUserSearch(){ 
+var PrefixValue,FirstName,LastName,MiddleName,MaidenName,AlternateName,UserName;	
+if($("#ListPrefix").val()!='0')
+{
+PrefixValue = $("#ListPrefix").val();
+}
+else{PrefixValue= null}
+if($("#txtFirstName").val()==null||$("#txtFirstName").val()=='')
+{
+FirstName=null;}
+else{FirstName=$("#txtFirstName").val();}
+if($("#txtLastName").val()==null||$("#txtLastName").val()=='')
+{
+LastName=null;	
+}
+else{LastName=$("#txtLastName").val();}
+if($("#txtMiddleName").val()==null||$("#txtMiddleName").val()=='')
+{
+MiddleName=null;	
+}
+else{MiddleName=$("#txtMiddleName").val();}
+if($("#txtUserName").val()==null||$("#txtUserName").val()=='')
+{
+UserName=null;	
+}
+else{UserName=$("#txtUserName").val();}
+if($("#txtMaidenName").val()==null||$("#txtMaidenName").val()=='')
+{
+MaidenName=null;	
+}
+else{MaidenName=$("#txtMaidenName").val()}
+if($("#txtAlternateName").val()==null||$("#txtAlternateName").val()=='')
+{
+AlternateName=null;	
+}
+else{AlternateName=$("#txtAlternateName").val();}
+var ParamData={};
+
+ParamData={"prefix":PrefixValue,"FirstName":FirstName,"LastName":LastName,"UserName":UserName,"MaidenName":MaidenName,"AlternateName":AlternateName, "MiddleName":MiddleName};
+		
+	$.ajax({
+		url: 'http://2bvision.com/kids2promobile/SearchService.asmx/GetUserSearch',
+		type: 'POST',
+		data:JSON.stringify(ParamData),
+		contentType: "application/json; charset=utf-8",
+		dataType: "json",
+		success: function (response) {
+			$("#SearchResult tbody").empty();			
+                renderTable(response.d);
+                },
+                failure: function (errMsg) {
+               alert(errMsg); //errorMessage is id of the div
+                }
+            });
+	}
+    </script>
+</head>
+<body>
+    <div id="wraper">
+        <header>
+          <nav>
+              <ul class="clearfix">
+                  <li>
+                      <a href="SportsDefinitions.html" target="_self" title="Sports" >Sports</a>
+                  </li>
+                  <li>
+                      <a href="createArticle.html" title="Articles" target="_self">Articles</a>
+                  </li>
+                  <li>
+                      <a class="ui-link" href="CreateTeam.html" title="Teams" target="_self">Teams</a>
+                  </li>
+                  
+                  <li>
+                      <a class="ui-link" href="CreateFanClub.html" title="Fanclubs" target="_self">Fanclubs</a>
+                  </li>
+              </ul>
+          </nav>
+      </header>
+        <!-- header ends -->
+        <!-- container starts-->
+        <div class="contetns clearfix">
+            <!-- left area starts-->
+            <div class="contentLeft fLeft">
+                <div class="innerwrapper">
+                    <!-- contentLeft -->
+                    <div class="clear">
+                    </div>
+                    <br />
+                    <div class="clearfix">
+                        <div class="sportSubNav fLeft">
+                            <a href="AdvancedSearch.html"><span>Search by name</span></a>
+                        </div>
+                        <div class="sportSubNav fLeft">
+                            <a href="LanguageSearch.html"><span>Search by Location & Language</span> </a>
+                        </div>
+                        <!--  <div class="sportSubNav fLeft">
+                            <a href="CriteriaSearch.html"><span>Member Criteria Search</span> </a>
+                        </div>-->
+                        <div class="sportSubNav fLeft">
+                            <a href="ArticleSearch.html"><span>Article Search</span> </a>
+                        </div>
+                        <div class="sportSubNav fLeft">
+                            <a href="TeamSearch.html" title="#"><span>Team Search</span> </a>
+                        </div>
+                        <div class="sportSubNav fLeft">
+                            <a href="FanclubSearch.html" title="#"><span>Fan Club Search</span> </a>
+                        </div>
+                        <div class="sportSubNav fLeft">
+                            <a href="KeywordSearch.html" title="#"><span>Keyword Search</span> </a>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <table id="HeaderTale" class="display">
+                    <thead>
+                        <tr>
+                            <th width="80px">
+                                Prefix
+                            </th>
+                        </tr>
+                        <tr>
+                            <th width="80px">
+                                FirstName
+                            </th>
+                            <th width="80px">
+                                MiddleName
+                            </th>
+                            <th width="80px">
+                                LastName
+                            </th>
+                            <th width="80px">
+                                UserName
+                            </th>
+                            <th width="80px">
+                                MaidenName
+                            </th>
+                            <th width="80px">
+                                AlternateName
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td width="80px">
+                                <select name="ListPrefix" style="width: 80px;" id="ListPrefix">
+                                    <option selected="true" value="0"></option>
+                                    <option value="Dr">Dr</option>
+                                    <option value="Mr">Mr</option>
+                                    <option value="Ms">Ms</option>
+                                    <option value="Mrs">Mrs</option>
+                                    <option value="Prof">Prof</option>
+                                </select>
+                            </td>
+                            <td width="80px">
+                                <input type="text" style="width: 80px;" id="txtFirstName" name="txtFirstName" onchange="GetUserSearch()" />
+                            </td>
+                            <td width="80px">
+                                <input type="text" style="width: 80px;" id="txtMiddleName" name="txtMiddleName" onchange="GetUserSearch()" />
+                            </td>
+                            <td width="80px">
+                                <input type="text" style="width: 80px;" id="txtLastName" name="txtLastName" onchange="GetUserSearch()" />
+                            </td>
+                            <td width="80px">
+                                <input type="text" style="width: 80px;" id="txtUserName" name="txtUserName" onchange="GetUserSearch()" />
+                            </td>
+                            <td width="80px">
+                                <input type="text" style="width: 80px;" id="txtMaidenName" name="txtMaidenName" onchange="GetUserSearch()" />
+                            </td>
+                            <td width="80px">
+                                <input type="text" style="width: 80px;" id="txtAlternateName" name="txtAlternateName"
+                                    onchange="GetUserSearch()" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="clear">
+                </div>
+                <div>
+                    <table id="SearchResult" class="dataTables_filter">
+                        <thead>
+                            <tr>
+                                <th>
+                                </th>
+                                <th>
+                                </th>
+                                <th>
+                                </th>
+                                <th>
+                                </th>
+                                <th>
+                                </th>
+                                <th>
+                                </th>
+                                <th>
+                                </th>
+                                <th>
+                                </th>
+                                <th>
+                                </th>
+                                <th>
+                                </th>
+                                <th>
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div id="errorMessage">
+                </div>
+                <br />
+                <br />
+                <br />
+                <br />
+                <!--    <div class="note">
+                        <p>
+                            The definitions and related features have been supplied by our research team and
+                            contributing sources. If you would like to contribute additional content to those
+                            features, we welcome your comments. You may also add your definition to our existing
+                            English interpretations. If you would like to suggest a new sport home page, including
+                            sport category, sport name, team, personalized sport home pages, gender, age, definitions,
+                            links, high school, college or universities; identification to inclusion of their
+                            sport home pages and any keywords associated with those sports, please <a href="SubmitRequest.aspx">
+                                Click Here to Submit Your Request. </a>All of these options can be submitted
+                            in your languages of choice.
+                        </p>
+                    </div>-->
+            </div>
+            <!-- left area ends-->
+            <!-- advertisement area starts-->
+            <div class="contentRight fRight">
+                </div>
+            <!-- advertisement area ends-->
+        </div>
+        <!-- container ends-->
+        <!-- footer starts -->
+        <div id="footerWrap">
+            <footer>
+              <a href="index.html" title="home" target="_self">Home</a>
+              <a href="static/Affiliates.html" title="Affiliates" target="_self">Affiliates</a>
+              <a href= "static/CollegiateRecruiting.html"title="Collegiate Recruiting" target="_self">Collegiate Recruiting</a>
+             <!-- <a href="#.html" title="Philanthropy" target="#">Philanthropy</a>
+              <a href="#.html" title="Disability Sports" target="#">Disability Sports</a>-->
+              <a href="static/Education.html" title="Education & Sports" target="_self">Education & Sports</a>
+              <a href= "static/K2psZOO.html"title="K2psZOO" target="_self">K2psZOO</a>
+              <a href= "static/NewsAndEvents.html"title="News & Events" target="_self">News & Events</a>
+             <!-- <a href="#.html" title="Sports Health & Fitness" target="_self">Sports Health & Fitness</a>-->
+              <a href="static/SportsICandy.html" title="SportsiCandy" target="_self"><i>SportsiCandy</i></a>
+              <a href="static/TechServices.html" title="Tech & Business Services" target="_self">Tech & Business Services</a>
+              <a href= "static/Write4Kids2ProSports.html"title="Write4K2PS" target="_self">Write4K2PS</a>
+              <a href="static/FutureFeatures.html" title="Future Features" target="_self">Future Features</a>
+          </footer>
+            <div class="dots clear">
+            </div>
+            <!-- Social Icon -->
+            <div class="clearfix">
+                <div class="copyright">
+                    &copy; Copyright 2011 Kids2prosports.com</div>
+                <div class="socialIcons">
+                    <a href="http://www.facebook.com/pages/Kids2ProSportscom/246679545408252" title="facebook"
+                        target="_self">
+                        <img alt="facebook" src="images/facebook.png"></a> <a href="http://www.myspace.com/kids2prosports"
+                            title="myspace" target="_self">
+                            <img alt="myspace" src="images/myspace.png"></a> <a href="http://sports.groups.yahoo.com/group/Kids2ProSports/"
+                                title="yahoo" target="_self">
+                                <img alt="yahoo" src="images/yahoo.png"></a> <a href="http://www.youtube.com/user/Kids2ProSports?ytsession=z-2bpR1F6KkzxpJXqUAuSu8npv_EAufzd8UxWG-wO5M7JJFFtEn4bzGiAjxyK77nRARXqOXvl0_lHPWLZSbjPLH5W6VE-Awt2DS2O0P13TfAJJIPjPnsPg2r0pvhvlcPvhJAC41cGiHg_FmPuR7MnwCoUVwPrdqonK2wykowr7AfvwqJbBaiQ4qoO7Z7M7ixFyTv2MB6OnHSs0Ztf6LbmUb8dI6xfiexczjVBMOjViU"
+                                    title="youtube" target="_self">
+                                    <img alt="youtube" src="images/youtube.png"></a> <a href="http://www.reddit.com/r/sports/comments/pamgt/kids2prosports_expands_it_international_sports/?already_submitted=true"
+                                        title="reddit" target="_self">
+                                        <img alt="reddit" src="images/reddit.png"></a> <a href="http://www.linkedin.com/in/kids2prosports"
+                                            title="linked" target="_self">
+                                            <img alt="linkedin" src="images/linkedin.png"></a>
+                </div>
+            </div>
+            <!-- Social Icon -->
+        </div>
+        <!-- footer ends -->
+    </div>
+</body>
+</html>

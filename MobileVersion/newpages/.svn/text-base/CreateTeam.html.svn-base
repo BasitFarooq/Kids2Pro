@@ -1,0 +1,164 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CreateTeam</title>
+
+<link rel="shortcut icon" href="images/favicon.ico" type="image/png">
+<meta content="width=device-width; initial-scale=1; maximum-scale=1; user-scalable=0;" name="viewport">
+<link href="css/style.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+<div>
+  <div id="wraper">
+      <header>
+          <nav>
+              <ul id="" class="clearfix">
+                  <li>
+                      <a href="#.html" title="home" target="#">home</a>
+                  </li>
+                  <li>
+                      <a href="#.html" title="mediakit" target="#">Media Kit</a>
+                  </li>
+                  <li>
+                      <a class="ui-link" href="#.html" title="faq" target="#">FAQ</a>
+                  </li>
+                  <li>
+                      <a class="ui-link" href="#.html" title="feedback" target="#">Feedback</a>
+                  </li>
+                  <li>
+                      <a class="ui-link" href="#.html" title="contactus" target="#">Contact Us</a>
+                  </li>
+              </ul>
+          </nav>
+      </header>
+      <!-- header ends -->
+      <!-- container starts-->
+      <div class="contetns clearfix">
+      	<!-- left area starts-->
+      	<div class="contentLeft fLeft">
+      		<div class="innerwrapper">
+        	<!-- input -->
+        	<div class="clear">
+          		<div class="note2">
+          	<h5><b>Create a Team</b></h5>	
+            <p>When creating a team first select your sport by clicking on the circle next to that sport; proceed to completing the information requested at the bottom of this page. Once the team is created it will become part of your profile. Please contact your teammates, friends, current K2ps members and others to join your team by becoming new members of K2PS.
+            </p>
+            <p>You have the option to select your sport by: (1) Clicking on the alphabetical letter, which will take you to all sports beginning with that letter (2) Type in the Name of the Sport to Begin Search (3) You can Filter Results by Sport Category, which will provide you with all sports based on your selection or (4) Filter by Gender/Age, which will provide all sports relative to what was selected.</p>
+            <p>When you click on your sport of choice it will redirect you to that sport's Home Page where you can view our member's articles, photos, videos, links, blogs, events, classifieds, keywords and spotlight features. Share to over 360 social networks and be notified when anything new is submitted to this sport. From your profile account you can submit to any of these features, and more …. In your languages of choice</p>
+            <p>If you would prefer to have your own personalized sport, team, health & fitness, business, professional, educational, country, coaching or philanthropy home page <a href="#" title="#">click here</a>
+            </p>
+            <div class="form">
+              	<h4><a href="#" title="#">Search for Existing Teams</a></h4>
+                <h5><b>Team Information</b></h5><br>
+                <h5>Sport</h5>
+              	<div class="row newuser">
+            		<div id="ageRegister">
+             			<h3>Sport Category (Required)</h3>
+              			<select name="#">
+                  			<option value="#">English</option>
+                  			<option value="#">Arabic</option>
+              			</select>
+              			<h3>Gender / Age Identification (Optional)</h3>
+                        <select name="#">
+                            <option value="#">--------------</option>
+                            <option value="#">Air Games</option>
+                        </select>
+                        <h3>Sport Name (Required)</h3>
+                        <select name="#">
+                            <option value="#">Boys</option>
+                            <option value="#">Youth</option>
+                        </select>
+                        <h3>School or Organization</h3>
+						<input type="text" name="#" value="Enter Title">
+                        <h3>Team Name</h3>
+                        <input type="text" name="#" value="Enter Title">
+            		</div>
+                    <div id="ageRegister">
+                    	<h5>Team Location Information</h5>
+             			<h3>Country</h3>
+              			<select name="#">
+                  			<option value="#">English</option>
+                  			<option value="#">Arabic</option>
+              			</select>
+              			<h3>State</h3>
+                        <select name="#">
+                            <option value="#">--------------</option>
+                            <option value="#">Air Games</option>
+                        </select>
+                        <h3>County</h3>
+                        <select name="#">
+                            <option value="#">Boys</option>
+                            <option value="#">Youth</option>
+                        </select>
+                        <h3>City</h3>
+                        <select name="#">
+                            <option value="#">Boys</option>
+                            <option value="#">Youth</option>
+                        </select><br>
+                        <a href="#" title="#">My City is Not Listed.</a>
+            		</div>
+                    <div id="ageRegister">
+                    	<h5>Team Description</h5>
+              			<textarea>
+                        	
+                        </textarea>
+            		</div>
+                    <div class="uploadfiles">
+                    	<h5>Select a Video to Attach (Optional)</h5>
+						<input type="text" value="Enter Title" name="#">
+						<input type="button" value="Browse">
+                    </div>
+                    <div class="sportsTab">
+                		<input type="button" name="#" value="Invite to Friends">
+                    	<input type="button" name="#" value="Impoart Contacts">
+                	</div>
+          		</div>
+             </div>
+          </div>
+        	</div>
+        </div>
+        </div>
+        <!-- left area ends-->
+        <div class="contentRight fRight">fdfplfpogjj</div>
+        <!-- advertisement area ends-->
+      </div>
+      <!-- container ends-->
+      <!-- footer starts -->
+      <div id="footerWrap">
+          <footer>
+              <a href="#.html" title="home" target="#">Home</a>
+              <a href="#.html" title="Affiliates" target="#">Affiliates</a>
+              <a href="#.html" title="Collegiate Recruiting" target="#">Collegiate Recruiting</a>
+              <a href="#.html" title="Philanthropy" target="#">Philanthropy</a>
+              <a href="#.html" title="Disability Sports" target="#">Disability Sports</a>
+              <a href="#.html" title="Education & Sports" target="#">Education & Sports</a>
+              <a href="#.html" title="K2psZOO" target="#">K2psZOO</a>
+              <a href="#.html" title="News & Events" target="#">News & Events</a>
+              <a href="#.html" title="Sports Health & Fitness" target="#">Sports Health & Fitness</a>
+              <a href="#.html" title="SportsiCandy" target="#"><i>SportsiCandy</i></a>
+              <a href="#.html" title="Tech & Business Services" target="#">Tech & Business Services</a>
+              <a href="#.html" title="Write4K2PS" target="#">Write4K2PS</a>
+              <a href="#.html" title="Future Features" target="#">Future Features</a>
+          </footer>
+          <div class="dots clear"></div>
+          <!-- Social Icon -->
+          <div class="clearfix">
+              <div class="copyright">&copy; Copyright 2011 Kids2prosports.com</div>
+              <div class="socialIcons">
+                <a href="#.html" title="facebook" target="#"><img alt="facebook" src="images/facebook.png"></a>
+                <a href="#.html" title="myspace" target="#"><img alt="myspace" src="images/myspace.png"></a>
+                <a href="#.html" title="yahoo" target="#"><img alt="yahoo" src="images/yahoo.png"></a>
+                <a href="#.html" title="youtube" target="#"><img alt="youtube" src="images/youtube.png"></a>
+                <a href="#.html" title="reddit" target="#"><img alt="reddit" src="images/reddit.png"></a>
+                <a href="#.html" title="linked" target="#"><img alt="linkedin" src="images/linkedin.png"></a>
+              </div>
+          </div>
+          <!-- Social Icon -->
+      </div>
+       <!-- footer ends -->
+  </div>
+</body>
+</html>

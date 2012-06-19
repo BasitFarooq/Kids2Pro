@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<widget xmlns = "http://www.w3.org/ns/widgets"
+    xmlns:gap = "http://phonegap.com/ns/1.0"
+    id        = "www.kids2prosports.com"
+    versionCode="11"
+    version   = "1.0.0">
+
+  <!-- versionCode is optional and Android only -->
+
+  <name>Kids2ProSports</name>
+
+  <description>
+    Kids2ProSports is the world’s premier multicultural Global Sports Network and Legacy Search Engine. It’s exclusive “Timeline Features” provide the resources to Create, Share and Preserve “Your Sports Legacy“ from Childhood… to Professional and Beyond.
+  </description>
+
+  <author href="http://www.kids2prosports.com" email="adnanlatif.324@gmail.com">
+    Adnan Latif
+  </author>
+  <icon src="icon.png" gap:role="default" />
+  <!--icons -->
+  
+        <!-- webos -->
+        <icon src="icons/webos/icon.png" gap:platform="webos" />
+        <icon src="icons/webos/miniicon.png" gap:platform="webos" gap:role="mini" />
+        <!-- iphone -->
+        <icon src="icons/ios/icon.png" width="57" height="57" />
+        <icon src="icons/ios/icon-72.png" gap:platform="ios" width="72" height="72" />
+        <icon src="icons/ios/icon_at_2x.png" width="114" height="114" />
+        <!-- andriod -->
+        <icon src="icons/android/ldpi.png" gap:platform="android" gap:density="ldpi" />
+        <icon src="icons/android/mdpi.png" gap:platform="android" gap:density="mdpi" />
+        <icon src="icons/android/hdpi.png" gap:platform="android" gap:density="hdpi" />
+        <!-- bb -->
+        <icon src="icons/bb/icon.png" gap:platform="blackberry" />
+        
+  
+  
+  
+  <!--icons end -->
+  
+  
+  <!--Splash screens -->
+  
+        <!-- iphone -->
+        <gap:splash src="splash.png" />
+        <gap:splash src="splash/ios/Default.png" width="320" height="480" />
+        <gap:splash src="splash/ios/Default_at_2x.png" width="640" height="960" />        
+        <gap:splash src="splash/ios/Default-Portrait.png" width="768" height="1024" />
+        <!-- blackberry -->
+        <gap:splash src="splash/bb/splash.png" gap:platform="blackberry" />
+        <!-- andriod -->
+        <gap:splash src="splash/android/ldpi.png" gap:platform="android" gap:density="ldpi" />
+        <gap:splash src="splash/android/mdpi.png" gap:platform="android" gap:density="mdpi" />
+        <gap:splash src="splash/android/hdpi.png" gap:platform="android" gap:density="hdpi" />
+        
+ 
+  <!--Splash ends-->
+
+
+   <preference name="orientation" value="landscape" />
+  
+</widget>

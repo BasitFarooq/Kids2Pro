@@ -1,0 +1,225 @@
+@charset "utf-8";
+/* CSS Document */
+
+#header {
+    height: 57px;
+}
+h1#logo {
+	float: left;
+    height: 19px;
+    margin: 0 0 0 17px;
+    padding: 0;
+    visibility: visible !important;
+    width: 149px;	
+}
+h1#logo a, h1#logo a:visited, h1#logo a:hover {
+	background: url(../images/logo.png) no-repeat left top;
+    height: 19px;
+    margin: 18px 0 6px;
+    width: 149px;	
+	display:block;
+}
+.slider {
+	background:#7f080b;
+	margin:0 auto;
+}
+#defultMenu {
+    background:url(../images/defultMenu.png) repeat-x left top;
+    height: 73px;
+}
+#defultMenu ul {
+    background: url(../images/menu-bg-rpt.png) no-repeat scroll left top transparent;
+    list-style-type: none;
+    margin: 0 auto;
+}
+#defultMenu ul li {
+    background: url(../images/menu-sep.png) no-repeat scroll right top transparent;
+    color: #FFFFFF;
+    display: inline-block;
+    float: left;
+    height: 78px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    width: 25%;
+}
+#defultMenu ul li.noSep {
+    background: none repeat scroll 0 0 transparent;
+}
+#defultMenu ul li a, #main li a:visited {
+    color: #FFFFFF;
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    height: 78px;
+    letter-spacing: -1px;
+    padding: 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+#defultMenu ul li a span, #defultMenu ul li a span:visited, #defultMenu ul li a span:hover {
+    display: block;
+    height: 30px;
+    line-height: 13px;
+    margin: 0 auto;
+    padding: 25px 7px 0;
+    width: 66px;
+}
+#defultMenu ul li a span.arrow, #defultMenu ul li a span.arrow:visited {
+    background: url(../images/small-arrows.png) no-repeat scroll center -9px transparent;
+    display: block;
+    height: 18px;
+    line-height: 18px;
+    margin: 1px auto 0;
+    padding: 0;
+}
+#defultMenu ul li a:hover {
+    background: url(../images/menu-hover.png) repeat-x scroll 0 0 transparent;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+#defultMenu ul li a:hover span.arrow {
+    background: url(../images/small-arrows.png) no-repeat scroll center top transparent;
+    display: block;
+    height: 18px;
+    line-height: 18px;
+    margin: 1px auto 0;
+    padding: 0;
+}
+#defultMenu ul li#current a, #defultMenu ul li#current a:visited, #defultMenu ul li#current a:hover {
+    background: url(../images/menu-hover.png) repeat-x scroll 0 0 transparent;
+    text-decoration: none;
+}
+#defultMenu ul li#current a span.arrow, #defultMenu ul li#current a:visited span.arrow, #defultMenu ul li#current a:hover span.arrow {
+    background: url(../images/small-arrows.png) no-repeat scroll center top transparent;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#nav ul {
+}
+#nav li {
+    height: 57px;
+}
+#nav li a, nav li a:visited {
+    letter-spacing: -0.5px;
+}
+
+/* container starts */
+.contetns {
+	padding:0 10px 10px 10px;
+	margin:0 auto;
+}
+
+/* user Profile */
+.innermenu ul{
+	background:#f1f1f1;
+	border-bottom:1px solid #e5e5e5;
+	padding:5px 10px 5px 10px;
+}
+.innermenu ul li{
+	float:left;
+	display:inline-block;
+	height:22px; line-height:22px;
+}
+.innermenu ul li a{
+	font-size:12px;
+	display:inline-block;
+	margin:0 7px;
+	color:#666666;
+}
+.innermenu ul li a:hover{
+	text-decoration:underline;
+	list-style-type:none;
+	color:#A71930;
+}
+.innermenu ul li.sep{
+	background:url(../images/sep.jpg) no-repeat left top;
+	height:22px;
+	line-height:22px;
+	width:1px;
+	float:left;	
+}
+
+#ageRegister {
+	margin:20px 0;
+}
+
+/* userProfile */
+#userProfile { 
+
+}
+.profilePIc {
+	border:1px solid #cccccc;
+	padding:1px;
+	width:50px;
+	height:50px;	
+}
+.profilePIc img { width:50px; height:50px;}
+.userLinks {	
+}
+.innerwrapper {
+	padding:10px 0;	
+}
+
+
+/* footer */
+#footerWrap {
+	background:#8a090c;
+    padding:10px 0;
+}
+footer {
+    margin: 0 12px;
+    font-size: 12px;
+    padding: 12px 0 2px;
+	text-align:center;
+}
+footer a, footer a:visited {
+    color: #ffffff;
+    display: inline-block;
+    height: 15px;
+    line-height: 15px;
+    margin: 0 5px 0 0;
+    padding: 3px 10px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+footer a:hover {
+    background:#520507;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+.dots {
+    background: url(../images/dots.gif) repeat-x scroll left bottom transparent;
+    font-size: 0;
+    height: 2px;
+    margin: 5px 7px 7px 6px;
+}
+.copyright {
+    color: #ffffff;
+    float: left;
+    font-size: 10px;
+    height: 20px;
+    line-height: 10px;
+    margin-left: 6px;
+    text-transform: uppercase;
+    width: 230px;
+}
+.socialIcons {
+    float: right;
+    height: 20px;
+    margin-right: 7px;
+	line-height:26px;
+}

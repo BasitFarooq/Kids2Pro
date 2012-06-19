@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>AdvertAssistance.aspx</title>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/png">
+    <meta content="width=device-width; initial-scale=1; maximum-scale=1; user-scalable=0;"
+        name="viewport">
+    <link href="../css/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div>
+        <div id="wraper">
+            <header>
+          <nav>
+              <ul class="clearfix">
+                  <li>
+                      <a href="#.html" title="home" target="#">Sports</a>
+                  </li>
+                  <li>
+                      <a href="#.html" title="mediakit" target="#">Articles</a>
+                  </li>
+                  <li>
+                      <a class="ui-link" href="#.html" title="faq" target="#">Teams</a>
+                  </li>
+                  <li>
+                      <a class="ui-link" href="#.html" title="feedback" target="#">Messages</a>
+                  </li>
+                  <li>
+                      <a class="ui-link" href="#.html" title="contactus" target="#">Fanclubs</a>
+                  </li>
+              </ul>
+          </nav>
+      </header>
+            <!-- header ends -->
+            <!-- container starts-->
+            <!-- inner menu starts-->
+            <div class="innermenu">
+                <ul class="clearfix">
+                    <li><a href="#.html" title="home" target="#">Home</a> </li>
+                    <li class="sep"></li>
+                    <li><a href="#.html" title="mediakit" target="#">Profile</a> </li>
+                    <li class="sep"></li>
+                    <li><a class="ui-link" href="#.html" title="faq" target="#">MessageBoard</a> </li>
+                    <li class="StaticMenu"><a href="#.html" title="home" target="#">Menu</a> </li>
+                </ul>
+            </div>
+            <!-- inner menu ends-->
+            <div class="contetns">
+                <div class="innerwrapper">
+                    <!-- ++++++++++++++++++++ ASPxMenu1 +++++++++++++++-->
+                   
+                </div>
+            </div>
+        </div>
+        <!-- container ends-->
+        <!-- footer starts -->
+        <div id="footerWrap">
+            <footer>
+              <a href="#.html" title="home" target="#">Home</a>
+              <a href="#.html" title="Affiliates" target="#">Affiliates</a>
+              <a href="#.html" title="Collegiate Recruiting" target="#">Collegiate Recruiting</a>
+              <a href="#.html" title="Philanthropy" target="#">Philanthropy</a>
+              <a href="#.html" title="Disability Sports" target="#">Disability Sports</a>
+              <a href="#.html" title="Education & Sports" target="#">Education & Sports</a>
+              <a href="#.html" title="K2psZOO" target="#">K2psZOO</a>
+              <a href="#.html" title="News & Events" target="#">News & Events</a>
+              <a href="#.html" title="Sports Health & Fitness" target="#">Sports Health & Fitness</a>
+              <a href="#.html" title="SportsiCandy" target="#"><i>SportsiCandy</i></a>
+              <a href="#.html" title="Tech & Business Services" target="#">Tech & Business Services</a>
+              <a href="#.html" title="Write4K2PS" target="#">Write4K2PS</a>
+              <a href="#.html" title="Future Features" target="#">Future Features</a>
+          </footer>
+            <div class="dots clear">
+            </div>
+            <!-- Social Icon -->
+            <div class="clearfix">
+                <div class="copyright">
+                    &copy; Copyright 2011<br>
+                    Kids2prosports.com</div>
+                <div class="socialIcons">
+                    <a href="#.html" title="facebook" target="#">
+                        <img alt="facebook" src="images/facebook.png"></a> <a href="#.html" title="myspace"
+                            target="#">
+                            <img alt="myspace" src="images/myspace.png"></a> <a href="#.html" title="yahoo" target="#">
+                                <img alt="yahoo" src="images/yahoo.png"></a> <a href="#.html" title="youtube" target="#">
+                                    <img alt="youtube" src="images/youtube.png"></a> <a href="#.html" title="reddit"
+                                        target="#">
+                                        <img alt="reddit" src="images/reddit.png"></a> <a href="#.html" title="linked" target="#">
+                                            <img alt="linkedin" src="images/linkedin.png"></a>
+                </div>
+            </div>
+            <!-- Social Icon -->
+        </div>
+        <!-- footer ends -->
+    </div>
+</body>
+</html>

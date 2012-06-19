@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>upload file using ajax jquery</title>
+    <script src="resources/jquery-1.4.1.js" type="text/javascript"></script>
+    <script src="resources/ajaxupload.js" type="text/javascript"></script>
+    
+    <style type="text/css">
+        input[type="button"].UploadButton
+        {
+            background: none;
+            border: none;
+            filter: none;
+            background-image: url('resources/Upload.png') !important;
+            cursor: pointer !important;
+            display: inline-block;
+            width: 80px;
+            height: 23px;
+        }
+        input[type="button"].hover
+        {
+            -moz-box-shadow: 0 0 3px #999;
+            -webkit-box-shadow: 0 0 3px #999;
+            box-shadow: 0 0 3px #999;
+        }
+        
+        .UploadDiv
+        {
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            background-color: #f6f6f6;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            color: #16387C;
+            display: block;
+            margin: 50px auto;
+            padding: 13px;
+            width:500px;
+            display:block;
+            
+        }
+        .delete
+        {
+          width : 20px;
+          height:20px;
+          cursor:pointer;
+          
+            }
+            
+            #UploadedFile  div
+            {
+                 border: 1px solid #ccc;
+                 display:inline-block;
+                }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+
+            new AjaxUpload('#UploadButton', {
+                action: 'UploadHandler1.ashx',
+                onComplete: function (file, response) {
+                    $("<div><img src='resources/btndelete.png' onclick=\"DeleteFile('" + response + "')\"  class='delete'/>" + response + "</div>").appendTo('#UploadedFile');
+                    $('#UploadStatus').html("file has been uploaded sucessfully");
+                    $("#UploadButton").hide();
+                },
+                onSubmit: function (file, ext) {
+                    if (!(ext && /^(jpeg|bmp|png|jpg)$/i.test(ext))) {
+                        alert('Invalid File Format.');
+                        return false;
+                    }
+                    $('#UploadStatus').html("Uploading...");
+                }
+            });
+
+        });
+
+
+        function DeleteFile(file) {
+            $('#UploadStatus').html("deleting...");
+            $.ajax({
+                url: "UploadHandler1.ashx?file=" + file,
+                type: "GET",
+                cache: false,
+                async: true,
+                success: function (html) {
+                    $('#UploadedFile').html("");
+                    $('#UploadStatus').html("file has been deleted");
+                    $("#UploadButton").show();
+
+                }
+            });
+
+        }
+
+   
+    </script>
+</head>
+<body>
+
+    <div class="UploadDiv">
+        <div id="UploadStatus">
+        </div>
+        <input type="file" id="" />
+        <input type="button" id="UploadButton" class="UploadButton"  />
+        <div id="UploadedFile">
+        </div>
+        <input type="hidden" id="FileNametoSave" name="FileNametoSave" value="asd" />
+        
+    </div>
+   
+</body>
+</html>

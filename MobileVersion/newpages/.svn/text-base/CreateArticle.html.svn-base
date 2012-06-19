@@ -1,0 +1,150 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CreateArticle</title>
+
+<link rel="shortcut icon" href="images/favicon.ico" type="image/png">
+<meta content="width=device-width; initial-scale=1; maximum-scale=1; user-scalable=0;" name="viewport">
+<link href="css/style.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+<div>
+  <div id="wraper">
+      <header>
+          <nav>
+              <ul id="" class="clearfix">
+                  <li>
+                      <a href="#.html" title="home" target="#">home</a>
+                  </li>
+                  <li>
+                      <a href="#.html" title="mediakit" target="#">Media Kit</a>
+                  </li>
+                  <li>
+                      <a class="ui-link" href="#.html" title="faq" target="#">FAQ</a>
+                  </li>
+                  <li>
+                      <a class="ui-link" href="#.html" title="feedback" target="#">Feedback</a>
+                  </li>
+                  <li>
+                      <a class="ui-link" href="#.html" title="contactus" target="#">Contact Us</a>
+                  </li>
+              </ul>
+          </nav>
+      </header>
+      <!-- header ends -->
+      <!-- container starts-->
+      <div class="contetns clearfix">
+      	<!-- left area starts-->
+      	<div class="contentLeft fLeft">
+          <div class="innerwrapper">
+              <!-- input -->
+              <div class="clear">
+            <h4>Categorize the Article</h4>
+            <div class="note">
+                <b>When submitting your article or video, please select the language, sport, sport category and keyword that best identifies your submission.</b> By completing these requests your content will be posted in your profile, sport, sport home page, sport category and keyword you selected. This affords you greater exposure and engages fellow members.
+            </div>
+            <div class="row newuser">
+              <div id="ageRegister">
+                <h5>Language:</h5>
+                <select name="#">
+                    <option value="#">English</option>
+                    <option value="#">Arabic</option>
+                </select>
+                <h5>Sport Category (Required):</h5>
+                <select name="#">
+                    <option value="#">--------------</option>
+                    <option value="#">Air Games</option>
+                </select>
+                <h5>Gender / Age Identification (Optional)</h5>
+                <select name="#">
+                    <option value="#">Boys</option>
+                    <option value="#">Youth</option>
+                </select>
+                <h5>Sport Name (Required)</h5>
+                <select name="#">
+                    <option value="#">--------</option>
+                    <option value="#">--------</option>
+                </select>
+                <h5>Keyword (Required)</h5>
+                <select name="#">
+                    <option value="#">--------</option>
+                    <option value="#">--------</option>
+                </select>
+                <div class="uploadfiles">
+                    <h5>Enter the Article's Title</h5>
+                    <input type="text" name="#" value="Enter Title">
+                    <h5>Select a Video to Attach (Optional)</h5>
+                    <input type="text" name="#" value="Enter Title">
+                    <input type="button" value="Browse">
+                    <span>Or</span>
+                    <h5>Share a YouTube Link (Optional)</h5>
+                    <input type="text" name="#" value="Enter Title">
+                </div>
+                <br>
+                <a href="#" title="#">How do I share a YouTube link?</a>
+                <br><br>
+                <div class="uploadfiles">
+                    <h6>Article Thumbnail Image (Optional)</h6>
+                    <p>
+                        This is a thumbnail images that will appear next to your article when it is being previewed throughout the site. This image is optional. If you don't choose an image, your profile picture will be automatically used instead. 
+                    </p>                         
+                    <h5>Enter the Article's Title</h5>
+                    <input type="text" name="#" value="Enter Title">
+                    <h5>Select a Video to Attach (Optional)</h5>
+                    <input type="text" name="#" value="Enter Title">
+                    <input type="button" value="Browse">
+                </div>
+                <div class="uploadfiles">
+                    <h5>Upload Picture for Article from Webcam (Optional)</h5>
+                    <a href="#">Upload Through Webcam</a><br>
+                    <input type="button" name="#" value="Upload">
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+        <!-- left area ends-->
+        <div class="contentRight fRight">fdfplffdsfdfdffdfdfdpogjj</div>
+        <!-- advertisement area ends-->
+      </div>
+      <!-- container ends-->
+      <!-- footer starts -->
+      <div id="footerWrap">
+          <footer>
+              <a href="#.html" title="home" target="#">Home</a>
+              <a href="#.html" title="Affiliates" target="#">Affiliates</a>
+              <a href="#.html" title="Collegiate Recruiting" target="#">Collegiate Recruiting</a>
+              <a href="#.html" title="Philanthropy" target="#">Philanthropy</a>
+              <a href="#.html" title="Disability Sports" target="#">Disability Sports</a>
+              <a href="#.html" title="Education & Sports" target="#">Education & Sports</a>
+              <a href="#.html" title="K2psZOO" target="#">K2psZOO</a>
+              <a href="#.html" title="News & Events" target="#">News & Events</a>
+              <a href="#.html" title="Sports Health & Fitness" target="#">Sports Health & Fitness</a>
+              <a href="#.html" title="SportsiCandy" target="#"><i>SportsiCandy</i></a>
+              <a href="#.html" title="Tech & Business Services" target="#">Tech & Business Services</a>
+              <a href="#.html" title="Write4K2PS" target="#">Write4K2PS</a>
+              <a href="#.html" title="Future Features" target="#">Future Features</a>
+          </footer>
+          <div class="dots clear"></div>
+          <!-- Social Icon -->
+          <div class="clearfix">
+              <div class="copyright">&copy; Copyright 2011 Kids2prosports.com</div>
+              <div class="socialIcons">
+                <a href="#.html" title="facebook" target="#"><img alt="facebook" src="images/facebook.png"></a>
+                <a href="#.html" title="myspace" target="#"><img alt="myspace" src="images/myspace.png"></a>
+                <a href="#.html" title="yahoo" target="#"><img alt="yahoo" src="images/yahoo.png"></a>
+                <a href="#.html" title="youtube" target="#"><img alt="youtube" src="images/youtube.png"></a>
+                <a href="#.html" title="reddit" target="#"><img alt="reddit" src="images/reddit.png"></a>
+                <a href="#.html" title="linked" target="#"><img alt="linkedin" src="images/linkedin.png"></a>
+              </div>
+          </div>
+          <!-- Social Icon -->
+      </div>
+       <!-- footer ends -->
+  </div>
+</body>
+</html>
